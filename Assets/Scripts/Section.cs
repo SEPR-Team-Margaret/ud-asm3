@@ -89,37 +89,54 @@ public class Section : MonoBehaviour {
 	}
 
     void OnMouseDown() {	//This function is called whenever the sector is clicked
-	   
-		if (landmarkImage != null) { 						//If this sector has a sprite attached to it for the landmark it contains
-			sectorImage.SetActive (true); 				//Enable the image game object (make it visible and editable)
-			landmarkNameObject.SetActive (true);				//Enable the text game object used for landmark information(make it visible and editable)
-			im.sprite = landmarkImage;   					//Set the image to the sprite attached to the sector
-			landmarkNameText.text = "Landmark: " + landmarkName + "\n Effect: " + landmarkEffect;	//Format and display the relevant land mark information in the text box
-		
-        } else { 									//if the sector does not contain a landmark
-			sectorImage.SetActive (false); 			//make sure the landmark image, 
-			landmarkNameObject.SetActive (false);				//and text is disabled
-		} 
-		
-        sectorNameText.text = sectorNameString;
-		if (flashEnable){						//If flashing is enabled set flash controller back to 0 when it is clicked	
-			flashCounter = 0;								//so that the section begins flashing.				
-		}							
-		
-        gameManager.BroadcastMessage("SetUnits", this.units);				//Send the relevant information of the sector to the conflict resolution script
-		gameManager.BroadcastMessage("SetPlayer", this.owner); 				//for use when both an attacking and defending sector have been selected
-		gameManager.BroadcastMessage("SetAdjacentSectors", this.adjacentSectors);
-		gameManager.BroadcastMessage("SelectSector", this.gameObject);
+        Game game = gameManager.GetComponent<Game>();
+        ConflictResolution conRes = gameManager.GetComponent<ConflictResolution>();
+
+        if (game.GetTurn() == GetOwner() || conRes.GetMode() == 3) //Only run this if a section belonging to the current player is clicked
+        {
+            if (landmarkImage != null)
+            {                       //If this sector has a sprite attached to it for the landmark it contains
+                sectorImage.SetActive(true);                //Enable the image game object (make it visible and editable)
+                landmarkNameObject.SetActive(true);             //Enable the text game object used for landmark information(make it visible and editable)
+                im.sprite = landmarkImage;                      //Set the image to the sprite attached to the sector
+                landmarkNameText.text = "Landmark: " + landmarkName + "\n Effect: " + landmarkEffect;   //Format and display the relevant land mark information in the text box
+
+            }
+            else
+            {                                   //if the sector does not contain a landmark
+                sectorImage.SetActive(false);           //make sure the landmark image, 
+                landmarkNameObject.SetActive(false);                //and text is disabled
+            }
+
+            sectorNameText.text = sectorNameString;
+            if (flashEnable)
+            {                       //If flashing is enabled set flash controller back to 0 when it is clicked	
+                flashCounter = 0;                               //so that the section begins flashing.				
+            }
+
+            gameManager.BroadcastMessage("SetUnits", this.units);               //Send the relevant information of the sector to the conflict resolution script
+            gameManager.BroadcastMessage("SetPlayer", this.owner);              //for use when both an attacking and defending sector have been selected
+            gameManager.BroadcastMessage("SetAdjacentSectors", this.adjacentSectors);
+            gameManager.BroadcastMessage("SelectSector", this.gameObject);
+        }
 	}  	
 
 
 	void SetOwner(int x){ 
 		owner = x;				//When this function is called it sets the owner of the section to whatever it is passed
 	}
+
+    int GetOwner(){
+        return owner;
+    }
 	
     void SetUnits(int x){ 
 		units = x;				//When this function is called it sets the units on this section to whatever it is passed
 	}
+
+    int GetUnits(){
+        return units;
+    }
 	
     void AddUnits(int x){ 		
 		units = units + x; 		//When this function is called it adds the number it was passed to the units to the section

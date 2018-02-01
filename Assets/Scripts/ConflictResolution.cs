@@ -6,7 +6,9 @@ using System;
 
 
 public class ConflictResolution : MonoBehaviour {
-	
+
+    private GameObject gameManager;
+
     private GameObject inputFieldObject; 
     private Text inputFieldText;                                    //Publicly define the text component of the input field
 
@@ -33,9 +35,14 @@ public class ConflictResolution : MonoBehaviour {
 	public GameObject invalidNumberOfUnitsPopup;						//Publicly define a variable that is attached to the script generating a popup for if an invalid number of units is selected
 	public GameObject riskyMovePopup;						//Publicly define a variable that is attached to the script generating a popup for if a user selects an attack with low chance of success
 
+    public int GetMode(){
+        return mode;
+    }
+
 	// Use this for initialization
-	void Start () { 
-		
+	void Start () {
+        gameManager = GameObject.Find("EventManager"); 	//Find the gameobject used to manage events 
+
         sectors = GameObject.FindGameObjectWithTag ("Sector"); 	//Find all gameobjects of sectors
 		
         inputFieldObject = GameObject.Find("UnitsTextbox");  					//Find the gameobject of the input field
@@ -77,9 +84,9 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	}
 
-    void SelectSector(GameObject sector){ 
+    void SelectSector(GameObject sector){
         
-		switch (mode) {
+        switch (mode) {
             case 1:												//If this is the first sector that has been picked
 			    
                 attackingSector = sector; 								//store the gameobject in attacking sector
@@ -116,11 +123,11 @@ public class ConflictResolution : MonoBehaviour {
 					    
                         } else {  								//If the attacking units are more than 2/3 of the defending units 
 						    ResolveConflict (); 							//call the function to resolve the conflict
-					    } 
+                        } 
 				    
-                    }else {  								//If the attacking units are less than 2/3 of the defending units 
-					    ResolveConflict (); 							//but its a friendly sector, move anyway
-				    } 
+                    }else {  								
+					    ResolveConflict (); 							//Friendly section to friendly section movement
+                    } 
 			    
                 } else { 									//If the second sector is not a neighbour of the first
 				    attackingSector.BroadcastMessage("startFlash"); 	//make the neighbouring sectors of the first sector flash, to remind the users where they can move units to
@@ -242,7 +249,8 @@ public class ConflictResolution : MonoBehaviour {
 		renderer.material.color = color; 	  
 		
         gameInstructions.text = "Pick a sector to attack with..."; //Update instructions to show user next step
-	} 
+        gameManager.GetComponent<Game>().NextTurn();
+    } 
 }
 	
 
