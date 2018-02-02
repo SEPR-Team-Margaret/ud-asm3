@@ -14,7 +14,7 @@ public class AssignUnits : MonoBehaviour {
 		
         foreach (GameObject sector in sectors) { 		// the unbiased AI, with a random number of units between 1 and 10.
 
-            int units = random.Next (1,11);
+            int units = random.Next (1,25);
 
             sector.BroadcastMessage ("SetOwner", 3); 		
             sector.BroadcastMessage ("SetUnits",units);

@@ -21,13 +21,13 @@ public class ConflictResolution : MonoBehaviour {
     private int mode;  									//define a integer used for controlling the current mode conflict resolution is in 
 														//this is used for differentiating if user is picking a sector to move units to or from
 	
-    private GameObject attackingSector; 							//Define a variable that will hold the game object of the attacking sector
-    private GameObject[] sectorsAdjacentToAttackingSector;                      //Define a variable that will hold the neighbouring sectors of the attacking sector
+    private Section attackingSector; 							//Define a variable that will hold the game object of the attacking sector
+    private Section[] sectorsAdjacentToAttackingSector;                      //Define a variable that will hold the neighbouring sectors of the attacking sector
     private int attackingPlayer;                                //Define a variable that will hold the owner of the attacking sector                                
     private int initialUnits;                               //Define a variable that will hold the original number of units on the attacking sector
     private int attackingUnits;                                 //Define a variable that will hold the number of units being used to attack
 
-    private GameObject defendingSector; 							//Define a variable that will hold the game object of the defending sector
+    private Section defendingSector; 							//Define a variable that will hold the game object of the defending sector
     private int defendingPlayer;									//Define a variable that will hold the owner of the defending sector
     private int defendingUnits; 								//Define a variable that will hold the number of units on the defending sector
 
@@ -78,13 +78,13 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	}
 
-    void SetAdjacentSectors(GameObject[] adjacentSectors){ 
+    void SetAdjacentSectors(Section[] adjacentSectors){ 
 		if (mode == 1) {								//If this is the first sector that has been picked
 			sectorsAdjacentToAttackingSector = adjacentSectors;								//set attacking options to all the neighbouring sectors of the clicked one
 		}
 	}
 
-    void SelectSector(GameObject sector){
+    void SelectSector(Section sector){
         
         switch (mode) {
             case 1:												//If this is the first sector that has been picked
@@ -103,7 +103,7 @@ public class ConflictResolution : MonoBehaviour {
 
                 bool sectorIsAdjacentToAttackingSector = false;							//Check if the second sector clicked is neighbouring the first sector clicked
 			    
-                foreach (GameObject G in sectorsAdjacentToAttackingSector) {
+                foreach (Section G in sectorsAdjacentToAttackingSector) {
 				    if (sector == G) { 						
 					    sectorIsAdjacentToAttackingSector = true;
 				    }

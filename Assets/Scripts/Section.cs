@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Section : MonoBehaviour {
 
 	private GameObject gameManager; 			//Define a gameobject which is used to controll general events
-	public GameObject[] adjacentSectors;  		//Publicly declare the sections this current section can attack, so they can be defined in the editor
+	public Section[] adjacentSectors;  		//Publicly declare the sections this current section can attack, so they can be defined in the editor
 	private int owner;						//Define a owner of the current setion.
 
 	private int units;						//Define the units on the current section.
@@ -70,9 +70,9 @@ public class Section : MonoBehaviour {
 
 	void Flash(){ 
 
-        foreach (GameObject sector in adjacentSectors){		//This function iteratively takes every object that this section can attack,
+        foreach (Section sector in adjacentSectors){		//This function iteratively takes every object that this section can attack,
         
-            Renderer renderer = sector.GetComponent<SpriteRenderer> (); //gets its renderer, 
+            Renderer renderer = sector.GetComponent<SpriteRenderer>(); //gets its renderer, 
 			Color color; 							//and colour.
 			color = renderer.material.color; 
 			
@@ -117,7 +117,7 @@ public class Section : MonoBehaviour {
             gameManager.BroadcastMessage("SetUnits", this.units);               //Send the relevant information of the sector to the conflict resolution script
             gameManager.BroadcastMessage("SetPlayer", this.owner);              //for use when both an attacking and defending sector have been selected
             gameManager.BroadcastMessage("SetAdjacentSectors", this.adjacentSectors);
-            gameManager.BroadcastMessage("SelectSector", this.gameObject);
+            gameManager.BroadcastMessage("SelectSector", this);
         }
 	}  	
 
@@ -126,15 +126,15 @@ public class Section : MonoBehaviour {
 		owner = x;				//When this function is called it sets the owner of the section to whatever it is passed
 	}
 
-    int GetOwner(){
+    public int GetOwner(){
         return owner;
     }
 	
-    void SetUnits(int x){ 
+    public void SetUnits(int x){ 
 		units = x;				//When this function is called it sets the units on this section to whatever it is passed
 	}
 
-    int GetUnits(){
+    public int GetUnits(){
         return units;
     }
 	

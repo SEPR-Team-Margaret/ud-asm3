@@ -323,8 +323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1338823423}
-  - {fileID: 2111175822}
+  - {fileID: 2111175825}
+  - {fileID: 1338823426}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -811,8 +811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 2123663399}
-  - {fileID: 1822355621}
+  - {fileID: 2123663403}
+  - {fileID: 1822355623}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -1240,9 +1240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 954273586}
-  - {fileID: 382334212}
-  - {fileID: 1668507822}
+  - {fileID: 954273589}
+  - {fileID: 1668507825}
+  - {fileID: 382334215}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -1800,8 +1800,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1142407195}
-  - {fileID: 1519029292}
+  - {fileID: 1519029294}
+  - {fileID: 1142407198}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -1950,11 +1950,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 954727882}
-  - {fileID: 1338823423}
-  - {fileID: 1668507822}
-  - {fileID: 230808962}
-  - {fileID: 954273586}
+  - {fileID: 1668507825}
+  - {fileID: 1338823426}
+  - {fileID: 230808965}
+  - {fileID: 954273589}
+  - {fileID: 954727884}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -2575,8 +2575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1592965303}
-  - {fileID: 694414302}
+  - {fileID: 1592965306}
+  - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -2710,9 +2710,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1592965303}
-  - {fileID: 2008361326}
-  - {fileID: 1116404376}
+  - {fileID: 1592965306}
+  - {fileID: 1116404378}
+  - {fileID: 2008361329}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -3168,12 +3168,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 766030296}
-  - {fileID: 585052864}
-  - {fileID: 1592965303}
-  - {fileID: 1116404376}
-  - {fileID: 954727882}
-  - {fileID: 954273586}
+  - {fileID: 766030298}
+  - {fileID: 585052867}
+  - {fileID: 1592965306}
+  - {fileID: 954727884}
+  - {fileID: 954273589}
+  - {fileID: 1116404378}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -3583,9 +3583,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1822355621}
-  - {fileID: 954273586}
-  - {fileID: 694414302}
+  - {fileID: 1822355623}
+  - {fileID: 954273589}
+  - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -4202,11 +4202,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 766030296}
-  - {fileID: 694414302}
-  - {fileID: 954727882}
-  - {fileID: 382334212}
-  - {fileID: 230808962}
+  - {fileID: 766030298}
+  - {fileID: 230808965}
+  - {fileID: 954727884}
+  - {fileID: 382334215}
+  - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -4349,10 +4349,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 954273586}
-  - {fileID: 1116404376}
-  - {fileID: 382334212}
-  - {fileID: 694414302}
+  - {fileID: 1116404378}
+  - {fileID: 694414304}
+  - {fileID: 954273589}
+  - {fileID: 382334215}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -5488,11 +5488,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 694414302}
-  - {fileID: 1592965303}
-  - {fileID: 613556460}
-  - {fileID: 2008361326}
-  - {fileID: 954727882}
+  - {fileID: 954727884}
+  - {fileID: 2008361329}
+  - {fileID: 1592965306}
+  - {fileID: 613556462}
+  - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -5624,9 +5624,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 2008361326}
-  - {fileID: 1590121315}
-  - {fileID: 376729559}
+  - {fileID: 376729562}
+  - {fileID: 2008361329}
+  - {fileID: 1590121318}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -6224,10 +6224,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 382334212}
-  - {fileID: 42146107}
-  - {fileID: 2111175822}
-  - {fileID: 1668507822}
+  - {fileID: 42146110}
+  - {fileID: 2111175825}
+  - {fileID: 382334215}
+  - {fileID: 1668507825}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -6303,6 +6303,7 @@ GameObject:
   - component: {fileID: 1352381730}
   - component: {fileID: 1352381731}
   - component: {fileID: 1352381732}
+  - component: {fileID: 1352381734}
   - component: {fileID: 1352381733}
   m_Layer: 8
   m_Name: EventManager
@@ -6396,6 +6397,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1352381733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352381727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6480e20efa1d848b8865c93481b7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1352381734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -7114,8 +7126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 2111175822}
-  - {fileID: 376729559}
+  - {fileID: 2111175825}
+  - {fileID: 376729562}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -7337,8 +7349,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 2008361326}
-  - {fileID: 1142407195}
+  - {fileID: 1142407198}
+  - {fileID: 2008361329}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -7478,10 +7490,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 694414302}
-  - {fileID: 585052864}
-  - {fileID: 613556460}
-  - {fileID: 1116404376}
+  - {fileID: 613556462}
+  - {fileID: 585052867}
+  - {fileID: 694414304}
+  - {fileID: 1116404378}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -7774,10 +7786,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 230808962}
-  - {fileID: 382334212}
-  - {fileID: 1338823423}
-  - {fileID: 2111175822}
+  - {fileID: 2111175825}
+  - {fileID: 1338823426}
+  - {fileID: 382334215}
+  - {fileID: 230808965}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -8326,8 +8338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 157470906}
-  - {fileID: 766030296}
+  - {fileID: 157470908}
+  - {fileID: 766030298}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -8902,10 +8914,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1116404376}
-  - {fileID: 613556460}
-  - {fileID: 1590121315}
-  - {fileID: 1142407195}
+  - {fileID: 1116404378}
+  - {fileID: 1590121318}
+  - {fileID: 1142407198}
+  - {fileID: 613556462}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -9244,10 +9256,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 1338823423}
-  - {fileID: 42146107}
-  - {fileID: 1519029292}
-  - {fileID: 1668507822}
+  - {fileID: 1519029294}
+  - {fileID: 1668507825}
+  - {fileID: 42146110}
+  - {fileID: 1338823426}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
@@ -9450,7 +9462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentSectors:
-  - {fileID: 157470906}
+  - {fileID: 157470908}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 0}
   sectorNameString: 
