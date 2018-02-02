@@ -5,7 +5,8 @@ using UnityEngine;
 public class AssignUnits : MonoBehaviour {
 	
     public GameObject[] sectors; 					//Declare Sections publicly so they can be assigned in editor 
-    private List<int> assignedSectors = new List<int>();		//Define a list of picked sections so that the same section will 
+    private List<int> assignedSectors = new List<int>();		//Define a list of picked sections so that the same section will
+	private Game game;
 	
     // Use this for initialization					//not be assigned twice.
 	void Start () {
@@ -52,12 +53,12 @@ public class AssignUnits : MonoBehaviour {
     }
 
 
-    void AllocatePlayer1NewUnits()
+    public void AllocatePlayer1NewUnits()
 	{ 					
         AllocateNewUnits(1);
 	}
 	
-    void AllocatePlayer2NewUnits()
+    public void AllocatePlayer2NewUnits()
 	{ 
         AllocateNewUnits(2);
 	}
