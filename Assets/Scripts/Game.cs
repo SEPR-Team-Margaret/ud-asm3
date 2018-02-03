@@ -10,12 +10,14 @@ public class Game : MonoBehaviour {
 	public bool spawnNewUnitsEachTurn = true;
 	private AssignUnits assignUnits;
     private NeutralAI neutralAI;
+    private SuddenDeath suddenDeath;
 
 
     // Use this for initialization
     void Start () {
         neutralAI = GetComponent<NeutralAI>();
 		assignUnits = GetComponent<AssignUnits> ();
+        suddenDeath = GetComponent<SuddenDeath>();
     }
 
     public int GetTurn(){
@@ -31,6 +33,9 @@ public class Game : MonoBehaviour {
         } else if (currentTurn == 3){
             neutralAI.DecideMove();
         }
+
+        // if sudden death mode is active, destroy some units along borders
+        suddenDeath.KillUnitsOnBorderSectors();
     }
 
 	//spawning new units for each turn - REPLACING IN GAME BUTTONS
@@ -40,6 +45,5 @@ public class Game : MonoBehaviour {
 		} else if (currentTurn == 2) {
 			assignUnits.AllocatePlayer1NewUnits();
 		}
-
 	}
 }
