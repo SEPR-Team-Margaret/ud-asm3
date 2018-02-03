@@ -203,6 +203,8 @@ public class ConflictResolution : MonoBehaviour {
 
 	void ResolveConflict() { 										//When it is time for the conflict to be resolved
 		
+        bool conflictOccurs;
+
         backButton.SetActive (false);								//Disable (and hide) the undo button
         System.Random random = new System.Random ();	 			
         String combatDescriptionString;
@@ -210,7 +212,9 @@ public class ConflictResolution : MonoBehaviour {
 		
         if (defendingPlayer != attackingPlayer) {								//If the owners of the two sectors are different the resolution is needed 
 										                                        //rather than just subtracting the units from one and adding to the other
-			combatDescriptionString = "ATT   DEF\n " + attackingUnits.ToString ().PadRight(2) + " vs " + defendingUnits.ToString (); //Update combat description to show initial state of conflict
+            conflictOccurs = true;
+
+            combatDescriptionString = "ATT   DEF\n " + attackingUnits.ToString ().PadRight(2) + " vs " + defendingUnits.ToString (); //Update combat description to show initial state of conflict
 			
             while ((attackingUnits > 0) && (defendingUnits > 0)) {   	//Keep iterating until either the attacking units or defending units are all gone
 
@@ -235,7 +239,9 @@ public class ConflictResolution : MonoBehaviour {
             combatDescription.text = combatDescriptionString;							//Update the actual text box to show the combat description
 		
         } else { 									//If the owners of the two sectors are the same 
-			defendingSector.BroadcastMessage ("AddUnits", attackingUnits); //Just add the number of units taken from the first sector to the second
+			
+            conflictOccurs = false;
+            defendingSector.BroadcastMessage ("AddUnits", attackingUnits); //Just add the number of units taken from the first sector to the second
 		}
 		
         mode=1; 											//After sorting out units and owners
@@ -249,7 +255,11 @@ public class ConflictResolution : MonoBehaviour {
 		renderer.material.color = color; 	  
 		
         gameInstructions.text = "Pick a sector to attack with..."; //Update instructions to show user next step
-        gameManager.GetComponent<Game>().NextTurn();
+
+        if (conflictOccurs) {
+            gameManager.GetComponent<SuddenDeath>().DecrementCountdown();
+            gameManager.GetComponent<Game>().NextTurn();
+        }
     } 
 }
 	
