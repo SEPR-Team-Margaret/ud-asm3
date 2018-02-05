@@ -5,29 +5,29 @@ using UnityEngine.UI;
 
 public class Section : MonoBehaviour {
 
-	private GameObject gameManager; 			//Define a gameobject which is used to controll general events
+	private GameObject gameManager; 		//Define a gameobject which is used to controll general events
 	public Section[] adjacentSectors;  		//Publicly declare the sections this current section can attack, so they can be defined in the editor
 	private int owner;						//Define a owner of the current setion.
 
 	private int units;						//Define the units on the current section.
-	public Text unitsText;						//Publicly declare a text object, so a label can be assigned to each section in the editor
+	public Text unitsText;					//Publicly declare a text object, so a label can be assigned to each section in the editor
 
-	private int flashCounter;							//Define a counter used to control flashing, Flash Controller (FC).
+	private int flashCounter;				//Define a counter used to control flashing, Flash Controller (FC).
 	private bool flashEnable; 				//Define a private boolean used for enabling/disabling flasher
 
-	public Sprite landmarkImage; 					//Publicly define a sprite which can be attached to any sector with a landmark
-	private GameObject sectorImage; 			//Define a object used for displaying sector specific images (like landmarks)
+	public Sprite landmarkImage; 			//Publicly define a sprite which can be attached to any sector with a landmark
+	private GameObject sectorImage; 		//Define a object used for displaying sector specific images (like landmarks)
 	private Image im; 						//Define the image component for the game object above
 
-	private GameObject sectorNameObject; 			//Define an object to display sector specific text (like sector name)
-	private Text sectorNameText; 					//Define the text component for the game object above
-	public string sectorNameString;					//Publicly define the name of the current sector so it can be assigned in editor
+	private GameObject sectorNameObject; 	//Define an object to display sector specific text (like sector name)
+	private Text sectorNameText; 			//Define the text component for the game object above
+	public string sectorNameString;			//Publicly define the name of the current sector so it can be assigned in editor
 
-	public string landmarkName; 					//Publicly define the name of the landmark in current sector (so it can be assigned in editor if there is one)
-	public string landmarkEffect;					//Publicly define the effect of the landmark in current sector (so it can be assigned in editor if there is one)
-	private GameObject landmarkNameObject; 			//Define an object to display landmark specific text (like landmark name)
-	private Text landmarkNameText;						//Define the text component for the game object above
-
+	public string landmarkName; 			//Publicly define the name of the landmark in current sector (so it can be assigned in editor if there is one)
+	public string landmarkEffect;			//Publicly define the effect of the landmark in current sector (so it can be assigned in editor if there is one)
+	private GameObject landmarkNameObject; 	//Define an object to display landmark specific text (like landmark name)
+	private Text landmarkNameText;			//Define the text component for the game object above
+	
 	// Use this for initialization
 	void Start () {
 		
@@ -51,7 +51,7 @@ public class Section : MonoBehaviour {
 		landmarkNameObject = GameObject.Find("LandmarkDescription");		//Find the gameobject used to display landmark specific text
 		landmarkNameText = GameObject.Find("LandmarkDescription").GetComponent<Text> (); 		//Find the text component of the above
 
-		unitsText = GetComponentInChildren<Text>();
+		unitsText = GetComponentInChildren<Text>();	
 	}
 	
 	// Update is called once per frame
@@ -59,15 +59,16 @@ public class Section : MonoBehaviour {
 		
         ColorByOwner();						//Update the colour of the section to represent the owner.
 		
-        unitsText.text = units.ToString();		//Update the label of the section to show the units.
+        unitsText.text = units.ToString();	//Update the label of the section to show the units.
 		
-        if (flashCounter<10) {						//If the flash controller has been set to less than 10, 
+        if (flashCounter<10) {				//If the flash controller has been set to less than 10, 
 			Flash();						//change the opacity (giving a flashing effect) 
 			flashCounter = flashCounter + 1;					//increment the flash controller.
-		}									//EXPLANATION: By setting the flash contoller to 0 the opacity will change and 
+			
+		}									//EXPLANATION: By setting the flash controller to 0 the opacity will change and 
 	}										//the controller incremented every frame for 10 frames where the controller now  
 											//exceeds 10 and the flashing effect stops.	
-
+											
 	void Flash(){ 
 
         foreach (Section sector in adjacentSectors){		//This function iteratively takes every object that this section can attack,
@@ -138,8 +139,11 @@ public class Section : MonoBehaviour {
         return units;
     }
 	
-    void AddUnits(int x){ 		
+    public void AddUnits(int x){ 		
 		units = units + x; 		//When this function is called it adds the number it was passed to the units to the section
+		if(units < 1) {
+			units = 1;
+		}
 	}
 	
     void TakeUnits(int x){ 
@@ -155,7 +159,7 @@ public class Section : MonoBehaviour {
 
 	void ColorByOwner(){ 
 		switch(this.owner){  //When this function is called it updates the colour of the section to represent the current owner.
-		case(1): 			//If the owner is player 1 the colour is set to red.
+		case(1): 			 //If the owner is player 1 the colour is set to red.
 			GetComponent<SpriteRenderer> ().color = Color.red;
 			break;
 		case(2): 			//If the owner is player 2 the colour is set to blue.
@@ -180,4 +184,3 @@ public class Section : MonoBehaviour {
 	} 
 
 }
-

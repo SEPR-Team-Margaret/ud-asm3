@@ -11,9 +11,9 @@ public class AssignUnits : MonoBehaviour {
     // Use this for initialization					//not be assigned twice.
 	void Start () {
         
-        System.Random random = new System.Random ();		//To start with every, section is assigned to Player 3, 
+        System.Random random = new System.Random ();	//To start with every, section is assigned to Player 3, 
 		
-        foreach (GameObject sector in sectors) { 		// the unbiased AI, with a random number of units between 1 and 10.
+        foreach (GameObject sector in sectors) { 		//the unbiased AI, with a random number of units between 1 and 10.
 
             int units = random.Next (1,25);
 

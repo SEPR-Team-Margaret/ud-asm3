@@ -10,31 +10,33 @@ public class ConflictResolution : MonoBehaviour {
     private GameObject gameManager;
 
     private GameObject inputFieldObject; 
-    private Text inputFieldText;                                    //Publicly define the text component of the input field
+    private Text inputFieldText;                            //Publicly define the text component of the input field
 
     private GameObject goButton; 
-    private GameObject backButton;  //Define gameobjects for the input field, submit button and undo button
+    private GameObject backButton;  						//Define gameobjects for the input field, submit button and undo button
 	
-    public Text combatDescription;  								//Publicly define a text component used for combat description
+    public Text combatDescription;  						//Publicly define a text component used for combat description
 	public Text gameInstructions;							//Publicly define a text component used for game instructions 
 
-    private int mode;  									//define a integer used for controlling the current mode conflict resolution is in 
-														//this is used for differentiating if user is picking a sector to move units to or from
+    private int mode;  										//define a integer used for controlling the current mode conflict resolution is in 
+															//this is used for differentiating if user is picking a sector to move units to or from
 	
     private Section attackingSector; 							//Define a variable that will hold the game object of the attacking sector
-    private Section[] sectorsAdjacentToAttackingSector;                      //Define a variable that will hold the neighbouring sectors of the attacking sector
+    private Section[] sectorsAdjacentToAttackingSector;         //Define a variable that will hold the neighbouring sectors of the attacking sector
     private int attackingPlayer;                                //Define a variable that will hold the owner of the attacking sector                                
-    private int initialUnits;                               //Define a variable that will hold the original number of units on the attacking sector
+    private int initialUnits;                               	//Define a variable that will hold the original number of units on the attacking sector
     private int attackingUnits;                                 //Define a variable that will hold the number of units being used to attack
 
     private Section defendingSector; 							//Define a variable that will hold the game object of the defending sector
-    private int defendingPlayer;									//Define a variable that will hold the owner of the defending sector
+    private int defendingPlayer;								//Define a variable that will hold the owner of the defending sector
     private int defendingUnits; 								//Define a variable that will hold the number of units on the defending sector
 
-    private GameObject sectors;							//Define a variable that will hold the gameobject of every sector on the map
-	public GameObject invalidNumberOfUnitsPopup;						//Publicly define a variable that is attached to the script generating a popup for if an invalid number of units is selected
-	public GameObject riskyMovePopup;						//Publicly define a variable that is attached to the script generating a popup for if a user selects an attack with low chance of success
-
+    private GameObject sectors;									//Define a variable that will hold the gameobject of every sector on the map
+	public GameObject invalidNumberOfUnitsPopup;				//Publicly define a variable that is attached to the script generating a popup for if an invalid number of units is selected
+	public GameObject riskyMovePopup;							//Publicly define a variable that is attached to the script generating a popup for if a user selects an attack with low chance of success
+	
+	private ChanceCards chanceCards;
+	
     public int GetMode(){
         return mode;
     }
@@ -47,16 +49,18 @@ public class ConflictResolution : MonoBehaviour {
 		
         inputFieldObject = GameObject.Find("UnitsTextbox");  					//Find the gameobject of the input field
         inputFieldText = inputFieldObject.GetComponentInChildren<UnityEngine.UI.Text> ();//Find the text compontnt of the input field
-        goButton = GameObject.Find("GoButton");   						//Find the gameobject of the submit button
-		backButton = GameObject.Find ("BackButton");							//Find the gameobject of the submit button
+        goButton = GameObject.Find("GoButton");   					//Find the gameobject of the submit button
+		backButton = GameObject.Find ("BackButton");				//Find the gameobject of the submit button
 		
-        mode = 1;  												//Set the mode to 1...where the attacking sector is picked (where units are moved from)
+        mode = 1;  													//Set the mode to 1...where the attacking sector is picked (where units are moved from)
 		
-        inputFieldObject.SetActive(false); 									//Disable (and hide) the input field
+        inputFieldObject.SetActive(false); 							//Disable (and hide) the input field
 		goButton.SetActive(false); 									//submit button 
-		backButton.SetActive (false);									//and undo button
+		backButton.SetActive (false);								//and undo button
 		
-        gameInstructions.text =  "Pick a sector to attack with..."; 	//Set the game instructions to tell user next action they should take
+        gameInstructions.text =  "Pick a sector to attack with..."; //Set the game instructions to tell user next action they should take
+		
+		chanceCards = gameManager.GetComponent<ChanceCards>();
 	}
 	
     void SetUnits(int units){ 
@@ -93,7 +97,7 @@ public class ConflictResolution : MonoBehaviour {
 			    mode = 2; 										//update the mode to 2...where users should enter number of units they intend to move/attack with
 			    sectors.BroadcastMessage ("setFlash", false);  	//disable flashing of all sectors
 			    
-                inputFieldObject.SetActive (true); 							//Enable (and show) the input field
+                inputFieldObject.SetActive (true); 						//Enable (and show) the input field
 			    goButton.SetActive (true);  							//submit button 
 			    backButton.SetActive (true);							//and undo button
 			    
@@ -148,8 +152,8 @@ public class ConflictResolution : MonoBehaviour {
                 mode = 1; 										//set mode to 1
 			    sectors.BroadcastMessage ("setFlash", true);	//enable the flashing of sectors again
 			    
-                inputFieldObject.SetActive(false); 									//Disable (and hide) the input field
-			    goButton.SetActive(false); 									//submit button 
+                inputFieldObject.SetActive(false); 								//Disable (and hide) the input field
+			    goButton.SetActive(false); 										//submit button 
 			    backButton.SetActive (false);									//and undo button
 			    
                 gameInstructions.text =  "Pick a sector to attack with..."; 	//Set the game instructions to tell user next action they should take   
@@ -161,7 +165,7 @@ public class ConflictResolution : MonoBehaviour {
                 mode = 2; 										//set mode to 2
 			    sectors.BroadcastMessage ("setFlash", false);  	//disable flashing of sectors
 			    
-                inputFieldObject.SetActive (true); 							//Enable (and show) the input field
+                inputFieldObject.SetActive (true); 						//Enable (and show) the input field
 			    goButton.SetActive (true);  							//submit button 
 			    backButton.SetActive (true);							//and undo button
 			    
@@ -223,7 +227,7 @@ public class ConflictResolution : MonoBehaviour {
 				
                 combatDescriptionString += "\n -" + defendingRandomInteger.ToString().PadRight(2) + " || -" + attackingRandomInteger.ToString(); //Update the combat description to show the random numbers selected
 				
-                attackingUnits = attackingUnits - defendingRandomInteger; 					//take the defending random integer from the attacking units
+                attackingUnits = attackingUnits - defendingRandomInteger; 				//take the defending random integer from the attacking units
 				defendingUnits = defendingUnits - attackingRandomInteger;  				//take the attacking random integer from the defending units
 				
                 combatDescriptionString += "\n  " + Math.Max(attackingUnits,0).ToString ().PadRight(2) + " vs " + Math.Max(defendingUnits,0).ToString (); //Update combat description to show remaining units
@@ -232,8 +236,13 @@ public class ConflictResolution : MonoBehaviour {
             defendingSector.BroadcastMessage ("SetUnits", defendingUnits); //Update units on defending sector to the remaining number of defending units
 			
             if (attackingUnits > 0) { 							//If there are any attacking units left
-				defendingSector.BroadcastMessage ("SetUnits", attackingUnits); 	//Update units on defending sector to the remaining number of attacking units
+				defendingSector.BroadcastMessage ("SetUnits", attackingUnits); 		//Update units on defending sector to the remaining number of attacking units
 				defendingSector.BroadcastMessage ("SetOwner", attackingPlayer);		//Update owner on defending sector to the owner of the attacking sector
+				if (attackingPlayer == 1) {											//Add one chance card to the attacking player
+					chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
+				} else {
+					chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
+				}
 			}
 			
             combatDescription.text = combatDescriptionString;							//Update the actual text box to show the combat description
