@@ -7,11 +7,11 @@ using UnityEngine;
 public class Game : MonoBehaviour {
 
     private int currentTurn = 1;
-	public bool spawnNewUnitsEachTurn = true;
 	private AssignUnits assignUnits;
     private NeutralAI neutralAI;
     private SuddenDeath suddenDeath;
-
+	public bool spawnNewUnitsEachTurn = true;
+	private float turnTimerLength = 30.0f;
 
     // Use this for initialization
     void Start () {
@@ -19,6 +19,22 @@ public class Game : MonoBehaviour {
 		assignUnits = GetComponent<AssignUnits> ();
         suddenDeath = GetComponent<SuddenDeath>();
     }
+
+	void Update() {
+		turnTimerLength -= Time.deltaTime;
+		//Debug.Log("Timer remaining: ");
+		//Debug.Log(turnTimerLength);
+		if (turnTimerLength < 0.0f) {
+			Debug.Log("TURN OVER - TIME RAN OUT");
+			NextTurn ();
+			Debug.Log(currentTurn);
+			ResetTimer ();
+		}			
+	}
+
+	public void ResetTimer() {
+		turnTimerLength = 10.0f;
+	}
 
     public int GetTurn(){
         return currentTurn;
