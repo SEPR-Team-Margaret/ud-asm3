@@ -78,7 +78,7 @@ public class Game : MonoBehaviour {
     // On input, break routine and restart itself
     IEnumerator DemoModeRoutine (){
         int timeoutTimer = 0;
-        while (!hadUpdate && timeoutTimer < (15 * 1))
+        while (!hadUpdate && timeoutTimer < (60 * 5))
         {
             yield return new WaitForSeconds(1);
             timeoutTimer += 1;
