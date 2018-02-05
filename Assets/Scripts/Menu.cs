@@ -13,4 +13,9 @@ public class Menu : MonoBehaviour {
 		Debug.Log("Application Quit");
 		Application.Quit();
 	}
+
+    public void DemoMode(bool value)
+    {
+        Data.IsDemo = value;
+    }
 }

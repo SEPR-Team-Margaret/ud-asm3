@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(NeutralAI))]
 
@@ -12,12 +13,18 @@ public class Game : MonoBehaviour {
     private SuddenDeath suddenDeath;
 	public bool spawnNewUnitsEachTurn = true;
 	private float turnTimerLength = 30.0f;
+    private bool hadUpdate = false;
 
     // Use this for initialization
     void Start () {
         neutralAI = GetComponent<NeutralAI>();
 		assignUnits = GetComponent<AssignUnits> ();
         suddenDeath = GetComponent<SuddenDeath>();
+
+        if (Data.IsDemo){
+            StartCoroutine("DemoModeRoutine");
+        }
+
     }
 
 	void Update() {
@@ -27,7 +34,7 @@ public class Game : MonoBehaviour {
 		if (turnTimerLength < 0.0f) {
 			Debug.Log("TURN OVER - TIME RAN OUT");
 			NextTurn ();
-			Debug.Log(currentTurn);
+			//Debug.Log(currentTurn);
 			ResetTimer ();
 		}			
 	}
@@ -62,4 +69,30 @@ public class Game : MonoBehaviour {
 			assignUnits.AllocatePlayer1NewUnits();
 		}
 	}
+
+    public void PassHadUpdate(){
+        hadUpdate = true;
+        Debug.Log("Received Update!!!");
+    }
+
+    // On input, break routine and restart itself
+    IEnumerator DemoModeRoutine (){
+        int timeoutTimer = 0;
+        while (!hadUpdate && timeoutTimer < (15 * 1))
+        {
+            yield return new WaitForSeconds(1);
+            timeoutTimer += 1;
+            Debug.Log(timeoutTimer);
+        }
+        if (hadUpdate)
+        {
+            hadUpdate = false;
+            StartCoroutine("DemoModeRoutine");
+            yield break;
+        }
+        SceneManager.LoadScene(0);
+
+    }
+
+
 }
