@@ -40,7 +40,7 @@ public class Game : MonoBehaviour {
 	}
 
 	public void ResetTimer() {
-		turnTimerLength = 10.0f;
+		turnTimerLength = 30.0f;
 	}
 
     public int GetTurn(){
@@ -72,7 +72,6 @@ public class Game : MonoBehaviour {
 
     public void PassHadUpdate(){
         hadUpdate = true;
-        Debug.Log("Received Update!!!");
     }
 
     // On input, break routine and restart itself
@@ -82,7 +81,6 @@ public class Game : MonoBehaviour {
         {
             yield return new WaitForSeconds(1);
             timeoutTimer += 1;
-            Debug.Log(timeoutTimer);
         }
         if (hadUpdate)
         {

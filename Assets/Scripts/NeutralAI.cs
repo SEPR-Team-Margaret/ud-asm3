@@ -27,8 +27,6 @@ public class NeutralAI : MonoBehaviour {
         {
             if (friendly && adjSection.GetOwner() == playerID && section.GetOwner() == playerID)
             {
-                Debug.Log(adjSection.GetOwner());
-                Debug.Log(section.GetOwner());
                 if (Mathf.Abs(adjSection.GetUnits() - section.GetUnits()) > curMaxDelta)
                 {
                     if (adjSection.GetUnits() > section.GetUnits())
@@ -61,6 +59,7 @@ public class NeutralAI : MonoBehaviour {
             returnPairSections.sectionHi = sectionHi;
             returnPairSections.sectionLo = sectionLo;
             returnPairSections.delta = curMaxDelta;
+
             return returnPairSections;
         }
         return null;
@@ -156,7 +155,9 @@ public class NeutralAI : MonoBehaviour {
     public void DecideMove(){
         // Attempt Reinforce vuln sectors
         Debug.Log("#PREINFORCE");
+        Debug.Log("PreCalc Threats");
         PairSections[] threatPairs = DeltaAllThreats();
+
         /* 10 PairSections
          * Where Hi is enemy and Lo is friendly
          * Sorted by threat
@@ -174,6 +175,7 @@ public class NeutralAI : MonoBehaviour {
             Debug.Assert(pair.sectionLo.GetOwner() == 3);
         }
         // TEST END
+        Debug.Log("PreCalc Friendlies");
         PairSections maxDeltaPairSections = DeltaAllFriendlyAdjacents();
         /* Delta > 0
          * Non Null
@@ -192,20 +194,20 @@ public class NeutralAI : MonoBehaviour {
         bool moveMade = false;
 
         if (threatPairs != null && !moveMade) {
-            Debug.Log("REINFORCE");
             OhBabyATriple firstValidTriple = FindFirstValidReinforce(threatPairs);
             if (firstValidTriple != null) {
                 DoMove(firstValidTriple.source, firstValidTriple.destination, firstValidTriple.toMove);
                 moveMade = true;
+                Debug.Log("REINFORCE");
             }
         }
         if (maxDeltaPairSections != null && !moveMade) {
             // Balance friendly sectors
-            Debug.Log("BALANCE");
             if (maxDeltaPairSections.delta > 2) {
                 int unitsToMove = Mathf.FloorToInt(maxDeltaPairSections.delta / 2);
                 DoMove(maxDeltaPairSections.sectionHi, maxDeltaPairSections.sectionLo, unitsToMove);
                 moveMade = true;
+                Debug.Log("BALANCE");
             }
         }
         if (!moveMade){
