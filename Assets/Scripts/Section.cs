@@ -24,7 +24,7 @@ public class Section : MonoBehaviour {
     public string sectorNameString;         //Publicly define the name of the current sector so it can be assigned in editor
 
     public string landmarkName;             //Publicly define the name of the landmark in current sector (so it can be assigned in editor if there is one)
-    public string landmarkEffect;           //Publicly define the effect of the landmark in current sector (so it can be assigned in editor if there is one)
+//    public string landmarkEffect;           //Publicly define the effect of the landmark in current sector (so it can be assigned in editor if there is one)
     private GameObject landmarkNameObject;  //Define an object to display landmark specific text (like landmark name)
     private Text landmarkNameText;          //Define the text component for the game object above
 
@@ -104,7 +104,7 @@ public class Section : MonoBehaviour {
                 sectorImage.SetActive(true);                //Enable the image game object (make it visible and editable)
                 landmarkNameObject.SetActive(true);             //Enable the text game object used for landmark information(make it visible and editable)
                 im.sprite = landmarkImage;                      //Set the image to the sprite attached to the sector
-                landmarkNameText.text = "Landmark: " + landmarkName + "\n Effect: " + landmarkEffect;   //Format and display the relevant land mark information in the text box
+                landmarkNameText.text = landmarkName;         // display landmark information in the text box
 
             }
             else {                                   //if the sector does not contain a landmark
