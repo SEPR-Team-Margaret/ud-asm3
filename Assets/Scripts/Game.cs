@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NeutralAI))]
 
@@ -14,13 +14,14 @@ public class Game : MonoBehaviour {
 	public bool spawnNewUnitsEachTurn = true;
 	private float turnTimerLength = 30.0f;
     private bool hadUpdate = false;
+	public Text timerText;
 
     // Use this for initialization
     void Start () {
         neutralAI = GetComponent<NeutralAI>();
 		assignUnits = GetComponent<AssignUnits> ();
         suddenDeath = GetComponent<SuddenDeath>();
-
+		timerText = GameObject.Find("TurnTimerText").GetComponent<Text>();
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
         }
@@ -31,6 +32,7 @@ public class Game : MonoBehaviour {
 		turnTimerLength -= Time.deltaTime;
 		//Debug.Log("Timer remaining: ");
 		//Debug.Log(turnTimerLength);
+		updateTimerText();
 		if (turnTimerLength < 0.0f) {
 			Debug.Log("TURN OVER - TIME RAN OUT");
 			NextTurn ();
@@ -41,6 +43,11 @@ public class Game : MonoBehaviour {
 
 	public void ResetTimer() {
 		turnTimerLength = 30.0f;
+	}
+
+	public void updateTimerText(){
+		int iTurnTimerLength = (int)(turnTimerLength);
+		timerText.text = "Turn time remaining: " + iTurnTimerLength.ToString();
 	}
 
     public int GetTurn(){
