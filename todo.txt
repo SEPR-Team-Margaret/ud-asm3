@@ -1,7 +1,18 @@
-Re-do unit assignment
-Get rid of unit assignment buttons
-Loading / Saving
-Mode Demo Button
-3 human players mode
-PVC minigame
+[SAM] Re-do unit assignment
+[SAM] Get rid of unit assignment buttons
+[LUKE] Loading / Saving
+[OLLIE] Move Demo Checkbox
+[DAVID] 3 human players mode
+[OLLIE] PVC minigame
+[BEN] Complete timer
+[BEN] Implement PVC (Spawning, position, minigame call)
+[SAM] Comment changes
+[ALL] DOCS
+	[] Implementation
+	[] Change Report
+		[] (Use ours) Risk Assessment
+		[] GUI Report
+		[] Testing Report
+		[] (Use ours) Methods
+
 
