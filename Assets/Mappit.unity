@@ -359,7 +359,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: eb7025353fffed643aa55df1e597aa62, type: 3}
   sectorNameString: 
   landmarkName: The Lounge
-  landmarkEffect: 
 --- !u!212 &42146112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -659,6 +658,122 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 53189408}
+--- !u!1 &54418695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 54418696}
+  - component: {fileID: 54418698}
+  - component: {fileID: 54418697}
+  - component: {fileID: 54418699}
+  m_Layer: 9
+  m_Name: Load
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &54418696
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54418695}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1759933217}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.63}
+  m_SizeDelta: {x: 17.25, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &54418697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54418695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 1
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: LOAD GAME
+--- !u!222 &54418698
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54418695}
+--- !u!114 &54418699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 54418695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 54418697}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &81722649
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +961,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 9a71ebf2fe9f3b04c9beb70ac623caf2, type: 3}
   sectorNameString: 
   landmarkName: Langwith College
-  landmarkEffect: 
 --- !u!212 &157470911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1274,7 +1388,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: bb0d47ebc898d0343b4705db45f3f2a0, type: 3}
   sectorNameString: 
   landmarkName: Halifax College
-  landmarkEffect: 
 --- !u!212 &230808967
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1424,6 +1537,133 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &287600907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 287600908}
+  - component: {fileID: 287600911}
+  - component: {fileID: 287600910}
+  - component: {fileID: 287600909}
+  m_Layer: 9
+  m_Name: Save
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &287600908
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287600907}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1759933217}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1.45}
+  m_SizeDelta: {x: 17.25, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &287600909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287600907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 287600910}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 287600907}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &287600910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287600907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 1
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: SAVE GAME
+--- !u!222 &287600911
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 287600907}
 --- !u!1 &291613716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,7 +2147,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 2a7a1af31c0d63b4e93c3f460d59be2b, type: 3}
   sectorNameString: 
   landmarkName: Wentworth College
-  landmarkEffect: 
 --- !u!212 &376729564
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2058,7 +2297,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 7c38c34411c415047864dc2c5660cd83, type: 3}
   sectorNameString: 
   landmarkName: The Quiet Place
-  landmarkEffect: 
 --- !u!212 &382334217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2984,7 +3222,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 33f2dbb10925f4749a7935784f0877fc, type: 3}
   sectorNameString: 
   landmarkName: Innovation Way
-  landmarkEffect: 
 --- !u!212 &585052869
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3118,7 +3355,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 04763745729976649a353bcdc3f2c03a, type: 3}
   sectorNameString: 
   landmarkName: JB Morrell Library
-  landmarkEffect: 
 --- !u!212 &613556465
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3575,7 +3811,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 76524b5d4be494943aee7f66ccef64b8, type: 3}
   sectorNameString: 
   landmarkName: Heslington Church
-  landmarkEffect: 
 --- !u!212 &694414307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3985,7 +4220,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: c8e5943eaa0c27746be12ad60d992ed3, type: 3}
   sectorNameString: 
   landmarkName: Lakeside Way
-  landmarkEffect: 
 --- !u!212 &766030300
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4594,7 +4828,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 8f359de997ddb354d872a4caf5b2b17f, type: 3}
   sectorNameString: 
   landmarkName: Charles XII
-  landmarkEffect: 
 --- !u!212 &954273591
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4738,7 +4971,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: f7916eb96bd0fe54297f759f35758983, type: 3}
   sectorNameString: 
   landmarkName: Derwent College
-  landmarkEffect: 
 --- !u!212 &954727887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5485,80 +5717,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1008177727}
---- !u!1 &1015715093
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1015715094}
-  - component: {fileID: 1015715096}
-  - component: {fileID: 1015715095}
-  m_Layer: 9
-  m_Name: Options
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1015715094
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1015715093}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 85.7}
-  m_Children: []
-  m_Father: {fileID: 1759933217}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.19999999}
-  m_SizeDelta: {x: 17.25, y: 14.56}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1015715095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1015715093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 1
-    m_FontStyle: 1
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "VIDEO SETTINGS \n\nAUDIO SETTINGS \n\nSAVE GAME\n\nLOAD GAME \n\n\n\n\nEXIT"
---- !u!222 &1015715096
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1015715093}
 --- !u!1 &1018580418
 GameObject:
   m_ObjectHideFlags: 0
@@ -6023,7 +6181,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: d30c889785a4e2e439a2d400d6f5f08a, type: 3}
   sectorNameString: 
   landmarkName: Market Square
-  landmarkEffect: 
 --- !u!212 &1116404381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6155,7 +6312,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 9664ae9ba20232746ac8824bb62a6813, type: 3}
   sectorNameString: 
   landmarkName: Biology Department
-  landmarkEffect: 
 --- !u!212 &1142407200
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6312,7 +6468,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1759933217}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6752,7 +6908,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 8ec33e3e3af7d99438a919f541faaf66, type: 3}
   sectorNameString: 
   landmarkName: Exhibition Centre
-  landmarkEffect: 
 --- !u!212 &1338823428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7680,7 +7835,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: db0a50797befe5d4ab0a52dd3a28b4c7, type: 3}
   sectorNameString: 
   landmarkName: Astrocampus
-  landmarkEffect: 
 --- !u!212 &1519029296
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7901,7 +8055,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 5a70f161077c52a48b55213fe5a22df9, type: 3}
   sectorNameString: 
   landmarkName: Vanbrugh College
-  landmarkEffect: 
 --- !u!212 &1590121320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8042,7 +8195,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 934243d2381339e48987fb24efb0e62f, type: 3}
   sectorNameString: 
   landmarkName: Alcuin College
-  landmarkEffect: 
 --- !u!212 &1592965308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8334,7 +8486,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: f34a7db9343d281429c9c1ef421726e6, type: 3}
   sectorNameString: 
   landmarkName: Sports Centre
-  landmarkEffect: 
 --- !u!212 &1668507827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8646,7 +8797,7 @@ Transform:
   m_LocalScale: {x: 7, y: 8, z: 57.87}
   m_Children: []
   m_Father: {fileID: 1759933217}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1749001420
 SpriteRenderer:
@@ -8716,7 +8867,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 510412970}
-  - {fileID: 1015715094}
+  - {fileID: 287600908}
+  - {fileID: 54418696}
+  - {fileID: 2128767448}
   - {fileID: 1749001419}
   - {fileID: 1183854028}
   m_Father: {fileID: 1572339822}
@@ -8878,7 +9031,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: 40844f25bd514184dbf0fc735836dc7e, type: 3}
   sectorNameString: 
   landmarkName: Goodricke College
-  landmarkEffect: 
 --- !u!212 &1822355626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9454,7 +9606,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: e58b37438f6fac04c8a7e74d7e377fd5, type: 3}
   sectorNameString: 
   landmarkName: The Student Hub
-  landmarkEffect: 
 --- !u!212 &2008361331
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9792,7 +9943,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: ec0e0de95581e95488a8bfded594a8e1, type: 3}
   sectorNameString: 
   landmarkName: James College
-  landmarkEffect: 
 --- !u!212 &2111175827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9991,7 +10141,6 @@ MonoBehaviour:
   landmarkImage: {fileID: 21300000, guid: a240dfe5c8af5de48bc8c5d391d97342, type: 3}
   sectorNameString: 
   landmarkName: Constantine College
-  landmarkEffect: 
 --- !u!1 &2127457327
 GameObject:
   m_ObjectHideFlags: 0
@@ -10114,6 +10263,122 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2127457327}
+--- !u!1 &2128767447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2128767448}
+  - component: {fileID: 2128767450}
+  - component: {fileID: 2128767449}
+  - component: {fileID: 2128767451}
+  m_Layer: 9
+  m_Name: Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2128767448
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128767447}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1759933217}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -1.23}
+  m_SizeDelta: {x: 17.25, y: 3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2128767449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128767447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 1
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 300
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: EXIT
+--- !u!222 &2128767450
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128767447}
+--- !u!114 &2128767451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128767447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 2128767449}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2142768605
 GameObject:
   m_ObjectHideFlags: 0

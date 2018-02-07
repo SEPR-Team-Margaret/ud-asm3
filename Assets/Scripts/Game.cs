@@ -30,25 +30,25 @@ public class Game : MonoBehaviour {
     }
 
 	void Update() {
-		turnTimerLength -= Time.deltaTime;
+		turnTimerLength -= Time.deltaTime; //decrements timer on each update
 		//Debug.Log("Timer remaining: ");
 		//Debug.Log(turnTimerLength);
-		updateTimerText();
-		if (turnTimerLength < 0.0f) {
+		updateTimerText(); //calls method to update counter in game UI
+		if (turnTimerLength < 0.0f) { //timer ran out
 			Debug.Log("TURN OVER - TIME RAN OUT");
-			NextTurn ();
+			NextTurn (); //move game to next player
 			//Debug.Log(currentTurn);
-			ResetTimer ();
+			ResetTimer (); //reset timer for next player
 		}			
 	}
 
-	public void ResetTimer() {
+	public void ResetTimer() { //resets timer
 		turnTimerLength = 30.0f;
 	}
 
 	public void updateTimerText(){
-		int iTurnTimerLength = (int)(turnTimerLength);
-		timerText.text = "Turn time remaining: " + iTurnTimerLength.ToString();
+		int iTurnTimerLength = (int)(turnTimerLength); //turns the float turnTimerLength to int to be displayed
+		timerText.text = "Turn time remaining: " + iTurnTimerLength.ToString(); //display timer text in game UI
 	}
 
     public int GetTurn(){
@@ -64,6 +64,7 @@ public class Game : MonoBehaviour {
         } else if (currentTurn == 3){
             neutralAI.DecideMove();
         }
+		ResetTimer ();
 
         // if sudden death mode is active, destroy some units along borders
         suddenDeath.KillUnitsOnBorderSectors();
