@@ -28,6 +28,8 @@ public class Section : MonoBehaviour {
     private GameObject landmarkNameObject;  //Define an object to display landmark specific text (like landmark name)
     private Text landmarkNameText;          //Define the text component for the game object above
 
+	public bool PVCHere;
+
     // Use this for initialization
     void Start() {
 
@@ -184,5 +186,9 @@ public class Section : MonoBehaviour {
     void startFlash() {     //used to begin flashing
         flashCounter = 0;
     }
+
+	public void spawnPVC(){
+		PVCHere = true;
+	}
 
 }

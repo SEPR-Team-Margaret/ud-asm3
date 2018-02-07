@@ -23,6 +23,7 @@ public class AssignUnits : MonoBehaviour {
                                                     //After all sections are under player 3's contol,
 		AssignPlayer (1, 3); 						//Player 1 is assigned 3 sections, with 25 units each.
 		AssignPlayer (2, 3);						//Player 2 is also assigned 3 sections, with 25 units each.
+		SpawnPVC();
 	}
 
     void AssignPlayer(int player, int sectors){ 			//This is the function that takes an integer representing the player
@@ -62,5 +63,13 @@ public class AssignUnits : MonoBehaviour {
 	{ 
         AllocateNewUnits(2);
 	}
-       
+     
+	public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
+
+		System.Random random = new System.Random (); 			//and a number of sections to assign to that player.
+		int i = 0;
+
+		int sectorID = random.Next(this.sectors.Length);       //picks a random section
+		this.sectors [sectorID].BroadcastMessage("spawnPVC"); //sets boolean for PVC to true
+	}
 }

@@ -28,7 +28,7 @@ public class Game : MonoBehaviour {
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
         }
-
+		SpawnPVCInSector ();
     }
 
 	void Update() {
@@ -40,15 +40,6 @@ public class Game : MonoBehaviour {
 			ResetTimer (); //reset timer for next player
 			conflictResolution.UndoPress(); //resets UI ready for the next player to select a sector
 		}			
-	}
-
-	public void ResetTimer() { //resets timer
-		turnTimerLength = 30.0f;
-	}
-
-	public void updateTimerText(){
-		int iTurnTimerLength = (int)(turnTimerLength); //turns the float turnTimerLength to int to be displayed
-		timerText.text = "Turn time remaining: " + iTurnTimerLength.ToString(); //display timer text in game UI
 	}
 
     public int GetTurn(){
@@ -78,11 +69,20 @@ public class Game : MonoBehaviour {
 		}
 	}
 
+	public void ResetTimer() { //resets timer
+		turnTimerLength = 30.0f;
+	}
+
+	public void updateTimerText(){
+		int iTurnTimerLength = (int)(turnTimerLength); //turns the float turnTimerLength to int to be displayed
+		timerText.text = "Turn time remaining: " + iTurnTimerLength.ToString(); //display timer text in game UI
+	}
+
     public void PassHadUpdate(){
         hadUpdate = true;
     }
-
-    // On input, break routine and restart itself
+		
+	// On input, break routine and restart itself
     IEnumerator DemoModeRoutine (){
         int timeoutTimer = 0;
         while (!hadUpdate && timeoutTimer < (60 * 5))
@@ -99,6 +99,4 @@ public class Game : MonoBehaviour {
         SceneManager.LoadScene(0);
 
     }
-
-
 }
