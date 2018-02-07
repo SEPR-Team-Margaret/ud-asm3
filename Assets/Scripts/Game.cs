@@ -12,6 +12,7 @@ public class Game : MonoBehaviour {
 	private AssignUnits assignUnits;
     private NeutralAI neutralAI;
     private SuddenDeath suddenDeath;
+	private ConflictResolution conflictResolution;
 	public bool spawnNewUnitsEachTurn = true;
 	private float turnTimerLength = 30.0f;
     private bool hadUpdate = false;
@@ -22,6 +23,7 @@ public class Game : MonoBehaviour {
         neutralAI = GetComponent<NeutralAI>();
 		assignUnits = GetComponent<AssignUnits> ();
         suddenDeath = GetComponent<SuddenDeath>();
+		conflictResolution = GetComponent<ConflictResolution>();
 		timerText = GameObject.Find("TurnTimerText").GetComponent<Text>();
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
@@ -31,14 +33,12 @@ public class Game : MonoBehaviour {
 
 	void Update() {
 		turnTimerLength -= Time.deltaTime; //decrements timer on each update
-		//Debug.Log("Timer remaining: ");
-		//Debug.Log(turnTimerLength);
 		updateTimerText(); //calls method to update counter in game UI
 		if (turnTimerLength < 0.0f) { //timer ran out
 			Debug.Log("TURN OVER - TIME RAN OUT");
 			NextTurn (); //move game to next player
-			//Debug.Log(currentTurn);
 			ResetTimer (); //reset timer for next player
+			conflictResolution.UndoPress(); //resets UI ready for the next player to select a sector
 		}			
 	}
 
@@ -65,7 +65,6 @@ public class Game : MonoBehaviour {
             neutralAI.DecideMove();
         }
 		ResetTimer ();
-
         // if sudden death mode is active, destroy some units along borders
         suddenDeath.KillUnitsOnBorderSectors();
     }

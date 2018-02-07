@@ -36,7 +36,8 @@ public class ConflictResolution : MonoBehaviour {
 	public GameObject riskyMovePopup;							//Publicly define a variable that is attached to the script generating a popup for if a user selects an attack with low chance of success
 	
 	private ChanceCards chanceCards;
-	
+	private Game game;
+
     public int GetMode(){
         return mode;
     }
@@ -144,7 +145,7 @@ public class ConflictResolution : MonoBehaviour {
 		    }
 	}
 
-	void UndoPress(){ 
+	public void UndoPress(){ 
         
 		switch(mode){
 		    case 2:												//When undo is clicked in mode 2
@@ -181,7 +182,7 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	}
 		
-	void SubmitPress(){ 									//When submit is pressed
+	public void SubmitPress(){ 									//When submit is pressed
 		
         attackingUnits = Convert.ToInt32(inputFieldText.text);  				//set the number of attacking units to the text the user has just entered and submitted
 		

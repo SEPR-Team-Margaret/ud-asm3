@@ -7106,7 +7106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f6d2f00694b31499fd4dd1fb693466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 60
+  countdown: 2
   severity: 2
   suddenDeathMode: 0
   indicator: {fileID: 0}
