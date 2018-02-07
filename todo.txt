@@ -7,7 +7,9 @@
 [BEN] Complete timer
 [BEN] Implement PVC (Spawning, position, minigame call)
 [SAM] Comment changes
-[ALL] DOCS
+[DAVID] AI Section Flashing 
+[LUKE] UI Tweaks, Changes and Updates
+[] DOCS
 	[] Implementation
 	[] Change Report
 		[] (Use ours) Risk Assessment
