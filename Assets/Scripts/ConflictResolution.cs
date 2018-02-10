@@ -37,6 +37,7 @@ public class ConflictResolution : MonoBehaviour {
 	
 	private ChanceCards chanceCards;
 	private Game game;
+	private AssignUnits assignUnits;
 
     public int GetMode(){
         return mode;
@@ -126,15 +127,18 @@ public class ConflictResolution : MonoBehaviour {
 						    riskyMovePopup.BroadcastMessage ("SetDefendingUnits", defendingUnits);
 						    riskyMovePopup.BroadcastMessage ("Open");	//and open the popup
 					    
-                        } else {  								//If the attacking units are more than 2/3 of the defending units 
+                        } 
+						else {  								//If the attacking units are more than 2/3 of the defending units 
 						    ResolveConflict (); 							//call the function to resolve the conflict
                         } 
 				    
-                    }else {  								
+                    }
+					else {  								
 					    ResolveConflict (); 							//Friendly section to friendly section movement
                     } 
 			    
-                } else { 									//If the second sector is not a neighbour of the first
+                } 
+				else { 									//If the second sector is not a neighbour of the first
 				    attackingSector.BroadcastMessage("startFlash"); 	//make the neighbouring sectors of the first sector flash, to remind the users where they can move units to
 			    }
 			    
@@ -201,7 +205,8 @@ public class ConflictResolution : MonoBehaviour {
 			goButton.SetActive(false); 							//and the submit button 
 			gameInstructions.text = "Pick a sector to move units to..."; //Update instructions to show user next step
 		
-        } else {  
+        } 
+		else {  
 			invalidNumberOfUnitsPopup.BroadcastMessage ("Open");			//If the user has selected an invalid number bring up a popup to give them information
 		}
 	}  
@@ -236,19 +241,31 @@ public class ConflictResolution : MonoBehaviour {
 			
             defendingSector.BroadcastMessage ("SetUnits", defendingUnits); //Update units on defending sector to the remaining number of defending units
 			
-            if (attackingUnits > 0) { 							//If there are any attacking units left
+            if (attackingUnits > 0) { 							//If there are any attacking units left - attack has won
 				defendingSector.BroadcastMessage ("SetUnits", attackingUnits); 		//Update units on defending sector to the remaining number of attacking units
 				defendingSector.BroadcastMessage ("SetOwner", attackingPlayer);		//Update owner on defending sector to the owner of the attacking sector
 				if (attackingPlayer == 1) {											//Add one chance card to the attacking player
 					chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
-				} else {
+					if (defendingSector.PVCHere == true) {
+						//PLAY MINI GAME FOR PLAYER 1
+						defendingSector.PVCHere = false;
+						assignUnits.SpawnPVC();
+					}
+				} 
+				else {
 					chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
+					if (defendingSector.PVCHere == true) {
+						//PLAY MINI GAME FOR PLAYER 2
+						defendingSector.PVCHere = false;
+						assignUnits.SpawnPVC();
+					}
 				}
 			}
 			
             combatDescription.text = combatDescriptionString;							//Update the actual text box to show the combat description
 		
-        } else { 									//If the owners of the two sectors are the same 
+        }
+		else { 									//If the owners of the two sectors are the same 
 			
             conflictOccurs = false;
             defendingSector.BroadcastMessage ("AddUnits", attackingUnits); //Just add the number of units taken from the first sector to the second
@@ -272,5 +289,3 @@ public class ConflictResolution : MonoBehaviour {
         }
     } 
 }
-	
-
