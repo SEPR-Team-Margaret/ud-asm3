@@ -70,6 +70,6 @@ public class AssignUnits : MonoBehaviour {
 		int i = 0;
 
 		int sectorID = random.Next(this.sectors.Length);       //picks a random section
-		this.sectors [sectorID].BroadcastMessage("spawnPVC"); //sets boolean for PVC to true
+		this.sectors[sectorID].BroadcastMessage("spawnPVC"); //sets boolean for PVC to true
 	}
 }

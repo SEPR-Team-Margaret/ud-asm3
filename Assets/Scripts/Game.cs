@@ -28,7 +28,6 @@ public class Game : MonoBehaviour {
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
         }
-		SpawnPVCInSector ();
     }
 
 	void Update() {
@@ -52,7 +51,8 @@ public class Game : MonoBehaviour {
         // Loops back to player 1 once player 3 is done
         if (currentTurn > 3){
             currentTurn = 1;
-        } else if (currentTurn == 3){
+        } 
+		else if (currentTurn == 3){
             neutralAI.DecideMove();
         }
 		ResetTimer ();
