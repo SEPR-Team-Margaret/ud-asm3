@@ -357,8 +357,8 @@ MonoBehaviour:
   - {fileID: 1338823426}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: eb7025353fffed643aa55df1e597aa62, type: 3}
-  sectorNameString: 
-  landmarkName: The Lounge
+  landmarkNameString: The Lounge
+  PVCHere: 0
 --- !u!212 &42146112
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -959,8 +959,8 @@ MonoBehaviour:
   - {fileID: 1822355623}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 9a71ebf2fe9f3b04c9beb70ac623caf2, type: 3}
-  sectorNameString: 
-  landmarkName: Langwith College
+  landmarkNameString: Langwith College
+  PVCHere: 0
 --- !u!212 &157470911
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1386,8 +1386,8 @@ MonoBehaviour:
   - {fileID: 382334215}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: bb0d47ebc898d0343b4705db45f3f2a0, type: 3}
-  sectorNameString: 
-  landmarkName: Halifax College
+  landmarkNameString: Halifax College
+  PVCHere: 0
 --- !u!212 &230808967
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2145,8 +2145,8 @@ MonoBehaviour:
   - {fileID: 1142407198}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 2a7a1af31c0d63b4e93c3f460d59be2b, type: 3}
-  sectorNameString: 
-  landmarkName: Wentworth College
+  landmarkNameString: Wentworth College
+  PVCHere: 0
 --- !u!212 &376729564
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2295,8 +2295,8 @@ MonoBehaviour:
   - {fileID: 954727884}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 7c38c34411c415047864dc2c5660cd83, type: 3}
-  sectorNameString: 
-  landmarkName: The Quiet Place
+  landmarkNameString: The Quiet Place
+  PVCHere: 0
 --- !u!212 &382334217
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3220,8 +3220,8 @@ MonoBehaviour:
   - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 33f2dbb10925f4749a7935784f0877fc, type: 3}
-  sectorNameString: 
-  landmarkName: Innovation Way
+  landmarkNameString: Innovation Way
+  PVCHere: 0
 --- !u!212 &585052869
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3353,8 +3353,8 @@ MonoBehaviour:
   - {fileID: 2008361329}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 04763745729976649a353bcdc3f2c03a, type: 3}
-  sectorNameString: 
-  landmarkName: JB Morrell Library
+  landmarkNameString: JB Morrell Library
+  PVCHere: 0
 --- !u!212 &613556465
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3809,8 +3809,8 @@ MonoBehaviour:
   - {fileID: 1116404378}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 76524b5d4be494943aee7f66ccef64b8, type: 3}
-  sectorNameString: 
-  landmarkName: Heslington Church
+  landmarkNameString: Heslington Church
+  PVCHere: 0
 --- !u!212 &694414307
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4218,8 +4218,8 @@ MonoBehaviour:
   - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: c8e5943eaa0c27746be12ad60d992ed3, type: 3}
-  sectorNameString: 
-  landmarkName: Lakeside Way
+  landmarkNameString: Lakeside Way
+  PVCHere: 0
 --- !u!212 &766030300
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4826,8 +4826,8 @@ MonoBehaviour:
   - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 8f359de997ddb354d872a4caf5b2b17f, type: 3}
-  sectorNameString: 
-  landmarkName: Charles XII
+  landmarkNameString: Charles XII
+  PVCHere: 0
 --- !u!212 &954273591
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4969,8 +4969,8 @@ MonoBehaviour:
   - {fileID: 382334215}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: f7916eb96bd0fe54297f759f35758983, type: 3}
-  sectorNameString: 
-  landmarkName: Derwent College
+  landmarkNameString: Derwent College
+  PVCHere: 0
 --- !u!212 &954727887
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6179,8 +6179,8 @@ MonoBehaviour:
   - {fileID: 694414304}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: d30c889785a4e2e439a2d400d6f5f08a, type: 3}
-  sectorNameString: 
-  landmarkName: Market Square
+  landmarkNameString: Market Square
+  PVCHere: 0
 --- !u!212 &1116404381
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6310,8 +6310,8 @@ MonoBehaviour:
   - {fileID: 1590121318}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 9664ae9ba20232746ac8824bb62a6813, type: 3}
-  sectorNameString: 
-  landmarkName: Biology Department
+  landmarkNameString: Biology
+  PVCHere: 0
 --- !u!212 &1142407200
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6906,8 +6906,8 @@ MonoBehaviour:
   - {fileID: 1668507825}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 8ec33e3e3af7d99438a919f541faaf66, type: 3}
-  sectorNameString: 
-  landmarkName: Exhibition Centre
+  landmarkNameString: Exhibition Centre
+  PVCHere: 0
 --- !u!212 &1338823428
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7532,7 +7532,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1465609679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7833,8 +7833,8 @@ MonoBehaviour:
   - {fileID: 376729562}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: db0a50797befe5d4ab0a52dd3a28b4c7, type: 3}
-  sectorNameString: 
-  landmarkName: Astrocampus
+  landmarkNameString: Astrocampus
+  PVCHere: 0
 --- !u!212 &1519029296
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8053,8 +8053,8 @@ MonoBehaviour:
   - {fileID: 2008361329}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 5a70f161077c52a48b55213fe5a22df9, type: 3}
-  sectorNameString: 
-  landmarkName: Vanbrugh College
+  landmarkNameString: Vanbrugh College
+  PVCHere: 0
 --- !u!212 &1590121320
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8193,8 +8193,8 @@ MonoBehaviour:
   - {fileID: 1116404378}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 934243d2381339e48987fb24efb0e62f, type: 3}
-  sectorNameString: 
-  landmarkName: Alcuin College
+  landmarkNameString: Alcuin College
+  PVCHere: 0
 --- !u!212 &1592965308
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8484,8 +8484,8 @@ MonoBehaviour:
   - {fileID: 230808965}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: f34a7db9343d281429c9c1ef421726e6, type: 3}
-  sectorNameString: 
-  landmarkName: Sports Centre
+  landmarkNameString: Sports Centre
+  PVCHere: 0
 --- !u!212 &1668507827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9029,8 +9029,8 @@ MonoBehaviour:
   - {fileID: 766030298}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: 40844f25bd514184dbf0fc735836dc7e, type: 3}
-  sectorNameString: 
-  landmarkName: Goodricke College
+  landmarkNameString: Goodricke College
+  PVCHere: 0
 --- !u!212 &1822355626
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9604,8 +9604,8 @@ MonoBehaviour:
   - {fileID: 613556462}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: e58b37438f6fac04c8a7e74d7e377fd5, type: 3}
-  sectorNameString: 
-  landmarkName: The Student Hub
+  landmarkNameString: The Student Hub
+  PVCHere: 0
 --- !u!212 &2008361331
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9941,8 +9941,8 @@ MonoBehaviour:
   - {fileID: 1338823426}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: ec0e0de95581e95488a8bfded594a8e1, type: 3}
-  sectorNameString: 
-  landmarkName: James College
+  landmarkNameString: James College
+  PVCHere: 0
 --- !u!212 &2111175827
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -10139,8 +10139,8 @@ MonoBehaviour:
   - {fileID: 157470908}
   unitsText: {fileID: 0}
   landmarkImage: {fileID: 21300000, guid: a240dfe5c8af5de48bc8c5d391d97342, type: 3}
-  sectorNameString: 
-  landmarkName: Constantine College
+  landmarkNameString: Constantine College
+  PVCHere: 0
 --- !u!1 &2127457327
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class InvalidUnitsPop : MonoBehaviour
 {
+    
+    /* For clarity, the field which was previously named 
+     * 'windowRect' has been renamed 'window'
+     */
+
 	//Define a 200x105 px window that will apear in the center of the screen.
     private Rect window = new Rect ((Screen.width - 200)/2, (Screen.height - 105)/2, 200, 125);
 	

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class RiskyMovePop : MonoBehaviour {
 	
+    /* For clarity, the following fields were renamed:
+     *      windowRect  ->  window
+     *      attu        ->  attackingUnits
+     *      defu        ->  defendingUnits
+     */ 
+
     //Define 200x130 px window will apear in the center of the screen.
     private Rect window = new Rect ((Screen.width - 200)/2, (Screen.height - 130)/2, 200, 130);
 	
@@ -47,12 +53,17 @@ public class RiskyMovePop : MonoBehaviour {
 		show = true;
 	} 
 
+    /* The parameter previously named 'AU' was renamed 'attackingUnits'
+     */ 
 	public void SetAttackingUnits(int attackingUnits)
 	{ 
 		this.attackingUnits = attackingUnits;
 	} 
-	public void SetDefendingUnits(int attackingUnits)
+
+    /* The parameter previously named 'DU' was renamed 'defendingUnits'
+     */ 
+	public void SetDefendingUnits(int defendingUnits)
 	{ 
-		this.defendingUnits = attackingUnits;
+		this.defendingUnits = defendingUnits;
 	}
 }

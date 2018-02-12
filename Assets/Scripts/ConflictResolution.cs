@@ -7,6 +7,37 @@ using System;
 
 public class ConflictResolution : MonoBehaviour {
 
+    /* For clarity, the following fields have been renamed:
+     * 
+     *      IF          ->  inputFieldObject
+     *      IFT         ->  inputFieldText
+     *      SB          ->  goButton
+     *      UD          ->  backButton
+     *      CmbDsc      ->  combatDescription
+     *      GmInstrctns ->  gameIntstructions
+     *      AttOwn      ->  attackingPlayer
+     *      orgUnits    ->  initialUnits
+     *      attUnits    ->  attackingUnits
+     *      DefOwn      ->  defendingPlayer
+     *      defUnits    ->  defendingUnits
+     *      Sectors     ->  sectors
+     *      InvUnitNumGO->  invalidNumberOfUnitsPopup
+     *      RiskyMoveGO ->  riskyMovePopup
+     * 
+     * The following fields have also been refactored:
+     * 
+     *      GameObject AttSec   ->  Section attackingSector
+     *      GameObject[] AttOps ->  Section[] sectorsAdjacentToAttackingSector
+     *      GameObject DefSec   ->  Section defendingSector
+     * 
+     * To support new features, the following fields have been added:
+     *      
+     *      gameManager
+     *      chanceCards
+     *      game
+     *      assignUnits
+     */ 
+
     private GameObject gameManager;
 
     private GameObject inputFieldObject; 
@@ -65,6 +96,8 @@ public class ConflictResolution : MonoBehaviour {
 		chanceCards = gameManager.GetComponent<ChanceCards>();
 	}
 	
+    /* For clarity, the parameter 'U' has been renamed 'units'
+     */
     void SetUnits(int units){ 
 		if (mode == 1) { 										//If this is the first sector that has been picked
 			initialUnits = units;										//set original units to the number passed (number of units on sector clicked)
@@ -75,6 +108,9 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	} 
 
+    /* For clarity, the method 'SetOwn' has been renamed 'SetPlayer',
+     * and the parameter 'owner' has been renamed 'player'
+     */
     void SetPlayer(int player){ 
 		if (mode == 1) { 								//If this is the first sector that has been picked
 			attackingPlayer = player;								//Set the attacking owner to the owner of the sector picked
@@ -84,12 +120,18 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	}
 
+    /* For clarity, the method, SetAttOps has been renamed 'SetAdjacentSectors',
+     * and the parameter 'GameObject[] Ops' has been refactored to 
+     * 'Section[] adjacentSectors'
+     */
     void SetAdjacentSectors(Section[] adjacentSectors){ 
 		if (mode == 1) {								//If this is the first sector that has been picked
 			sectorsAdjacentToAttackingSector = adjacentSectors;								//set attacking options to all the neighbouring sectors of the clicked one
 		}
 	}
 
+    /* The field 'GameObject Sector' has been refactored to 'Section sector'
+     */
     void SelectSector(Section sector){
         
         switch (mode) {
@@ -107,6 +149,9 @@ public class ConflictResolution : MonoBehaviour {
 		
             case 3:   											//If this is the second sector that has been picked
 
+                /* For clarity, the variable 'ValidOp' was renamed to
+                 * 'sectorIsAdjacentToAttackingSector'
+                 */
                 bool sectorIsAdjacentToAttackingSector = false;							//Check if the second sector clicked is neighbouring the first sector clicked
 			    
                 foreach (Section G in sectorsAdjacentToAttackingSector) {
@@ -211,6 +256,8 @@ public class ConflictResolution : MonoBehaviour {
 		}
 	}  
 
+    /* To support new features, the field 'conflictOccurs' was added
+     */
 	void ResolveConflict() { 										//When it is time for the conflict to be resolved
 		
         bool conflictOccurs;
@@ -274,7 +321,7 @@ public class ConflictResolution : MonoBehaviour {
         mode=1; 											//After sorting out units and owners
 
         sectors.BroadcastMessage ("setFlash", true);		//Enabling flashing on all sectors
-		
+
         Renderer renderer = attackingSector.GetComponent<SpriteRenderer> (); 
 		Color color; 													
 		color = renderer.material.color; 					//Update the transparency of the attacking sector to be semi-transparent
@@ -283,6 +330,8 @@ public class ConflictResolution : MonoBehaviour {
 		
         gameInstructions.text = "Pick a sector to attack with..."; //Update instructions to show user next step
 
+        /* Only end the current turn if a conflict occus
+         */
         if (conflictOccurs) {
             gameManager.GetComponent<SuddenDeath>().DecrementCountdown();
             gameManager.GetComponent<Game>().NextTurn();
