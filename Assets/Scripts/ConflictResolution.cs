@@ -93,7 +93,7 @@ public class ConflictResolution : MonoBehaviour {
 		
         gameInstructions.text =  "Pick a sector to attack with..."; //Set the game instructions to tell user next action they should take
 		
-		chanceCards = gameManager.GetComponent<ChanceCards>();
+		chanceCards = GameObject.Find("CardUI").GetComponent<ChanceCards>();
 	}
 	
     /* For clarity, the parameter 'U' has been renamed 'units'
@@ -139,7 +139,6 @@ public class ConflictResolution : MonoBehaviour {
 			    
                 attackingSector = sector; 								//store the gameobject in attacking sector
 			    mode = 2; 										//update the mode to 2...where users should enter number of units they intend to move/attack with
-			    sectors.BroadcastMessage ("setFlash", false);  	//disable flashing of all sectors
 			    
                 inputFieldObject.SetActive (true); 						//Enable (and show) the input field
 			    goButton.SetActive (true);  							//submit button 
@@ -183,8 +182,8 @@ public class ConflictResolution : MonoBehaviour {
                     } 
 			    
                 } 
-				else { 									//If the second sector is not a neighbour of the first
-				    attackingSector.BroadcastMessage("startFlash"); 	//make the neighbouring sectors of the first sector flash, to remind the users where they can move units to
+				else {                                  //If the second sector is not a neighbour of the first
+                    attackingSector.Flash(); //make the neighbouring sectors of the first sector flash, to remind the users where they can move units to
 			    }
 			    
                 break;
@@ -200,7 +199,6 @@ public class ConflictResolution : MonoBehaviour {
 		    case 2:												//When undo is clicked in mode 2
 			    
                 mode = 1; 										//set mode to 1
-			    sectors.BroadcastMessage ("setFlash", true);	//enable the flashing of sectors again
 			    
                 inputFieldObject.SetActive(false); 								//Disable (and hide) the input field
 			    goButton.SetActive(false); 										//submit button 
@@ -213,7 +211,6 @@ public class ConflictResolution : MonoBehaviour {
             case 3: 											//When undo is clicked in mode 3
 			    
                 mode = 2; 										//set mode to 2
-			    sectors.BroadcastMessage ("setFlash", false);  	//disable flashing of sectors
 			    
                 inputFieldObject.SetActive (true); 						//Enable (and show) the input field
 			    goButton.SetActive (true);  							//submit button 
@@ -238,7 +235,7 @@ public class ConflictResolution : MonoBehaviour {
         if ((attackingUnits < initialUnits)&(attackingUnits > 0)) {  		//Check that the number of units the user is attacking with is positive but less than the number of units on the sector
 		
             mode = 3;										//move the mode to 3...where users pick the sector they wish to attack/move units to 
-			attackingSector.BroadcastMessage ("startFlash");			//make the neighbouring sectors of the first sector flash...so user knows where they cna move units to
+			attackingSector.Flash();			//make the neighbouring sectors of the first sector flash...so user knows where they cna move units to
 			
             Renderer renderer = attackingSector.GetComponent<SpriteRenderer> (); 
 			Color color; 									//Change transparency of attacking sector so that it is fully opaque
@@ -319,8 +316,6 @@ public class ConflictResolution : MonoBehaviour {
 		}
 		
         mode=1; 											//After sorting out units and owners
-
-        sectors.BroadcastMessage ("setFlash", true);		//Enabling flashing on all sectors
 
         Renderer renderer = attackingSector.GetComponent<SpriteRenderer> (); 
 		Color color; 													

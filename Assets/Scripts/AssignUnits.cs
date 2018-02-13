@@ -26,20 +26,22 @@ public class AssignUnits : MonoBehaviour {
          *      RUnits  ->  units
          */
 
-        System.Random random = new System.Random ();	//To start with every, section is assigned to Player 3, 
-		
-        foreach (GameObject sector in sectors) { 		//the unbiased AI, with a random number of units between 1 and 10.
+        System.Random random = new System.Random ();    //To start with every, section is assigned to AI, 
+
+        foreach (GameObject sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
 
             // max number of units that the neutral AI's sector can
             // start with was increased from 11 to 25
-            int units = random.Next (1,25);
+            int units = random.Next(1, 25);
 
-            sector.BroadcastMessage ("SetOwner", 3); 		
-            sector.BroadcastMessage ("SetUnits",units);
-		}
-                                                    //After all sections are under player 3's contol,
-		AssignPlayer (1, 3); 						//Player 1 is assigned 3 sections, with 25 units each.
-		AssignPlayer (2, 3);						//Player 2 is also assigned 3 sections, with 25 units each.
+            sector.BroadcastMessage("SetOwner", Data.RealPlayers + 1);
+            sector.BroadcastMessage("SetUnits", units);
+        }
+                                                    //After all sections are under AI's contol,
+
+        for (int i = 1; i <= Data.RealPlayers; i++) {
+            AssignPlayer(i, 3);
+        }
 		SpawnPVC();
 	}
 
@@ -100,9 +102,13 @@ public class AssignUnits : MonoBehaviour {
 	{ 
         AllocateNewUnits(2);
 	}
-     
 
-	public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
+    public void AllocatePlayer3NewUnits() {
+        AllocateNewUnits(3);
+    }
+
+
+    public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
 
 		System.Random random = new System.Random (); 			//and a number of sections to assign to that player.
 		int i = 0;

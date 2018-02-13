@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NeutralAI : MonoBehaviour {
-    private int playerID = 3;
+    private int playerID = Data.RealPlayers + 1;
     private Game game;
     private Section[] sections;
 
@@ -152,7 +152,9 @@ public class NeutralAI : MonoBehaviour {
 
     private void MakeMove(Section source, Section destination, int amount) {
         source.SetUnits(source.GetUnits() - amount);
+        source.FlashSelf();
         destination.SetUnits(destination.GetUnits() + amount);
+        destination.FlashSelf();
     }
 
     public void DecideMove() {
@@ -195,8 +197,8 @@ public class NeutralAI : MonoBehaviour {
         else {
             Debug.Log("AI Performed no action");
         }
+        game.NextTurn();
     }
-
 }
 
 class OrderedList {
@@ -233,8 +235,8 @@ class OrderedList {
 
         foreach (ListItem item in list) {
             if (curMax == null || curMax.threatHeuristic > curMaxValue) {
-                curMaxValue = item.threatHeuristic;
                 curMax = item;
+                curMaxValue = item.threatHeuristic;
             }
         }
         return curMax;
@@ -247,8 +249,8 @@ class OrderedList {
 
         foreach (ListItem item in list) {
             if (curMax == null || curMax.balanceHeuristic > curMaxValue) {
-                curMaxValue = curMax.balanceHeuristic;
                 curMax = item;
+                curMaxValue = curMax.balanceHeuristic;
             }
         }
         return curMax;

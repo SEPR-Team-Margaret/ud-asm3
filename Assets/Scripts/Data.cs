@@ -6,6 +6,7 @@ public static class Data
 {
 
     private static bool isDemo;
+    private static int realPlayers;
 
     public static bool IsDemo
     {
@@ -16,6 +17,15 @@ public static class Data
         set
         {
             isDemo = value;
+        }
+    }
+
+    public static int RealPlayers {
+        get {
+            return realPlayers;
+        }
+        set {
+            realPlayers = value;
         }
     }
 }

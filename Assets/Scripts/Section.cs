@@ -42,9 +42,6 @@ public class Section : MonoBehaviour {
     public Text unitsText;                  //Publicly declare a text object, so a label can be assigned to each section in the editor
     private int numberOfNewUnitsPerAdjacentSector = 3;
 
-    private int flashCounter;               //Define a counter used to control flashing, Flash Controller (FC).
-    private bool flashEnable;               //Define a private boolean used for enabling/disabling flasher
-
     public Sprite landmarkImage;            //Publicly define a sprite which can be attached to any sector with a landmark
     private Image sectorImage;                       //Define the image component for the game object above
 
@@ -64,9 +61,6 @@ public class Section : MonoBehaviour {
         color.a = 0.5f;                     //Change the opacity of the section so it is 50% transparent.
         renderer.material.color = color;
 
-        flashCounter = 15;                          //Update the value of the flash controller so the section does not flash.
-        flashEnable = true;                         //enable flashing
-
         gameManager = GameObject.Find("EventManager");  //Find the gameobject used to manage events 
 
         sectorImage = GameObject.Find("LandmarkImage").GetComponent<Image>();        //Find the image component of the above 
@@ -81,37 +75,48 @@ public class Section : MonoBehaviour {
 
         ColorByOwner();                     //Update the colour of the section to represent the owner.
 
-        unitsText.text = units.ToString();  //Update the label of the section to show the units.
+        unitsText.text = units.ToString();
+    }                                      
 
-        if (flashCounter < 10) {                //If the flash controller has been set to less than 10, 
-            Flash();                        //change the opacity (giving a flashing effect) 
-            flashCounter = flashCounter + 1;                    //increment the flash controller.
 
-        }                                   //EXPLANATION: By setting the flash controller to 0 the opacity will change and 
-    }                                       //the controller incremented every frame for 10 frames where the controller now  
-                                            //exceeds 10 and the flashing effect stops.	
+    public void Flash() {
 
-    void Flash() {
+        foreach (Section sector in adjacentSectors) {
+            //This function iteratively takes every object that this section can attack,
+            StartCoroutine(FlashSelfCo(sector));
+        }
 
-        foreach (Section sector in adjacentSectors)
-        {       //This function iteratively takes every object that this section can attack,
+    }
 
-            Renderer renderer = sector.GetComponent<SpriteRenderer>(); //gets its renderer, 
-            Color color = renderer.material.color;            //and colour.
+    public void FlashSelf () {
+        // Flash only this section
+        StartCoroutine(FlashSelfCo(this));
+    }
 
-            if (color.a == 1) {                     //It swaps the opacity between 1 and 0.5.
+    IEnumerator FlashSelfCo (Section section) {
+        // Flash only this section
+        Renderer renderer = section.GetComponent<SpriteRenderer>();
+        Color color = renderer.material.color;
+
+        for (int i = 0; i < 6; i++) {
+
+            if (color.a == 1) {
                 color.a = 0.5f;
             }
             else {
                 color.a = 1;
             }
 
-            renderer.material.color = color;        //Updates the colour.
+            renderer.material.color = color;
+
+            yield return new WaitForSeconds(0.1f);
         }
 
-        System.Threading.Thread.Sleep(100);         //And adds in a little wait so the user can see the change.
-
+        color.a = 0.5f;
+        renderer.material.color = color;
     }
+
+
 
     void OnMouseDown() {	//This function is called whenever the sector is clicked
 
@@ -130,7 +135,7 @@ public class Section : MonoBehaviour {
         }
 
         //Only respond to the click if a section belonging to the current player is clicked
-        if (game.GetTurn() == GetOwner() || conflictResolution.GetMode() == 3) {  
+        if (game.GetTurn() == GetOwner() || conflictResolution.GetMode() == 3) { 
             if (landmarkImage != null) {                       //If this sector has a sprite attached to it for the landmark it contains
                 sectorImage.gameObject.SetActive(true);                //Enable the image game object (make it visible and editable)
                 landmarkNameText.gameObject.SetActive(true);             //Enable the text game object used for landmark information(make it visible and editable)
@@ -143,8 +148,8 @@ public class Section : MonoBehaviour {
                 landmarkNameText.gameObject.SetActive(false);                //and text is disabled
             }
 
-            if (flashEnable) {                       //If flashing is enabled set flash controller back to 0 when it is clicked	
-                startFlash();                               //so that the section begins flashing.				
+            if (conflictResolution.GetMode() == 1) {
+                Flash();
             }
 
             gameManager.BroadcastMessage("SetUnits", this.units);               //Send the relevant information of the sector to the conflict resolution script
@@ -206,19 +211,14 @@ public class Section : MonoBehaviour {
             case (3):           //If the owner is player 3 the colour is set to green.
                 GetComponent<SpriteRenderer>().color = Color.green;
                 break;
+            case (4):           //If the owner is player 3 the colour is set to green.
+                GetComponent<SpriteRenderer>().color = Color.yellow;
+                break;
             default:            //If the owner is no-one the colour is set to white.
                 GetComponent<SpriteRenderer>().color = Color.clear;
                 break;
         }
 
-    }
-
-    void setFlash(bool flash) {     //simply used to enable/disable flashing
-        flashEnable = flash;
-    }
-
-    void startFlash() {     //used to begin flashing
-        flashCounter = 0;
     }
 
     /* This method was added to support new features
