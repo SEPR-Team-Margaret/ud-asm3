@@ -1,7 +1,7 @@
 [SAM] Re-do unit assignment
  *DONE*
 [SAM] Get rid of unit assignment buttons
- *TRIVIAL*
+ *DONE*
 [LUKE] Loading / Saving
 
 [OLLIE] Move Demo Checkbox
@@ -11,12 +11,11 @@
 [OLLIE] PVC minigame
 
 [BEN] Complete timer *DONE*
-[BEN] Implement PVC (Spawning, position, minigame call)
-
+[BEN] Implement PVC *DONE*
 [SAM] Comment changes
  *DONE*
 [DAVID] AI Section Flashing 
-
+*DONE*
 [LUKE] UI Tweaks, Changes and Updates
 
 [] DOCS
