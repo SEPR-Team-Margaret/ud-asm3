@@ -18,18 +18,36 @@
 *DONE*
 [LUKE] UI Tweaks, Changes and Updates
 
+
 [] DOCS
 
-	[] Implementation
-
+	[] Website
+		[] All Assessment 3 Deliverables
+		[] Inherited GUI and Testing Reports
+		[] Executable
+		[Ben] Test Plan & Results
+		[Sam] User Manual
 	[] Change Report
 	
-	[] (Use ours) Risk Assessment
+		[Sam]	 Formal Approaches
+		[Martin] GUI Report
 	
-	[] GUI Report
-	
-	[] Testing Report
-	
-	[] (Use ours) Methods
+		[Ben]	 Testing Report
+
+		[Ben]	 (Use ours) Risk Assessment
+		
+		[Martin] (Use ours) Methods
 
 
+
+	[] Implementation
+		[David]	 Demo Mode
+		[Luke]	 Main Menu
+		[Luke]	 Save & Load
+		[David]	 Neural AI
+		[David]	 3-Player Mode
+		[Martin] Chance Cards
+		[Ben]	 PVC
+		[Ollie]	 Minigame
+		[Sam]	 Sudden Death
+		[Sam]	 Changes to Code
