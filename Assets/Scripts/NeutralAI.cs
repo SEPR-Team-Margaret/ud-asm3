@@ -92,7 +92,6 @@ public class NeutralAI : MonoBehaviour {
 
     private bool Reinforce(Section section) {
         
-
         // Must be < 1
         float partialMoveCoeff = 0.7f;
 
@@ -115,11 +114,11 @@ public class NeutralAI : MonoBehaviour {
                 // The neighbour has units to spare
                 } else if (enemyMagForAdj < numAdjUnits) {
                     // The neighbour has all the required units
-                    if (numAdjUnits - enemyMagForAdj > reqUnits + enemyMagForAdj) {
+                    if ((numAdjUnits - enemyMagForAdj) + 1 > reqUnits + enemyMagForAdj) {
                         MakeMove(adjsection, section, reqUnits);
                         return true;
                     // There were sufficent units to make a 'partial' reinforce move
-                    } else if ((numAdjUnits - enemyMagForAdj) > ((reqUnits + enemyMagForAdj) * partialMoveCoeff)) {
+                    } else if (((numAdjUnits - enemyMagForAdj) + 1) > ((reqUnits + enemyMagForAdj) * partialMoveCoeff)) {
                         int toMove = (int)((numAdjUnits - enemyMagForAdj) * partialMoveCoeff);
                         Debug.Assert(toMove < numAdjUnits, "Attempted to move more units than existed!");
 
