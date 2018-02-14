@@ -296,15 +296,22 @@ public class ConflictResolution : MonoBehaviour {
 						assignUnits.SpawnPVC();
 					}
 				} 
-				else {
+				else if (attackingPlayer == 2) {
 					chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
 					if (defendingSector.PVCHere == true) {
 						//PLAY MINI GAME FOR PLAYER 2
 						defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
-				}
-			}
+				} else if (attackingPlayer == 3 && Data.RealPlayers == 3) {
+                    chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
+                    if (defendingSector.PVCHere == true) {
+                        //PLAY MINI GAME FOR PLAYER 3
+                        defendingSector.PVCHere = false;
+                        assignUnits.SpawnPVC();
+                    }
+                }
+            }
 			
             combatDescription.text = combatDescriptionString;							//Update the actual text box to show the combat description
 		
