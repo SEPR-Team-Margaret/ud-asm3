@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupController : MonoBehaviour {
-    
+
+    /* For clarity, the field which was previously named
+     * 'SettingPop' was renamed 'SettingPopup'
+     */ 
+
     private GameObject SettingPopup; 				//Define a gameobject that will be popped up
 
 	// Use this for initialization

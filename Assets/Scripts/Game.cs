@@ -48,11 +48,11 @@ public class Game : MonoBehaviour {
     public void NextTurn(){
         currentTurn = currentTurn + 1;
 		SpawnNewUnits ();
-        // Loops back to player 1 once player 3 is done
-        if (currentTurn > 3){
+        // Loops back to player 1 once last player is done
+        if (currentTurn > Data.RealPlayers + 1){
             currentTurn = 1;
         } 
-		else if (currentTurn == 3){
+		else if (currentTurn == Data.RealPlayers + 1) {
             neutralAI.DecideMove();
         }
 		ResetTimer ();
@@ -66,8 +66,10 @@ public class Game : MonoBehaviour {
 			assignUnits.AllocatePlayer2NewUnits();
 		} else if (currentTurn == 2) {
 			assignUnits.AllocatePlayer1NewUnits();
-		}
-	}
+		} else if (currentTurn == 3 && Data.RealPlayers == 2) {
+            assignUnits.AllocatePlayer1NewUnits();
+        }
+    }
 
 	public void ResetTimer() { //resets timer
 		turnTimerLength = 30.0f;

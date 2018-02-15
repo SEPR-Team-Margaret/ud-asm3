@@ -5,249 +5,271 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class NeutralAI : MonoBehaviour {
-    private int playerID = 3;
+    private int playerID = Data.RealPlayers + 1;
     private Game game;
+    private Section[] sections;
 
     void Start() {
         game = GameObject.Find("EventManager").GetComponent<Game>();
+        sections = GameObject.Find("Sectors").GetComponentsInChildren<Section>();
     }
 
-    int SumOfAdjacentEnemies(Section section){
-        return 0;
-    }
-
-    PairSections DeltaAdjacents(Section section, bool friendly = true){
-        // Return a pair of sections based on the local max delta of unit magnitudes between a section and it neighbours
-
-        int curMaxDelta = 0;
-        Section sectionHi = null;
-        Section sectionLo = null;
-
-        foreach (var adjSection in section.adjacentSectors)
-        {
-            if (friendly && adjSection.GetOwner() == playerID && section.GetOwner() == playerID)
-            {
-                if (Mathf.Abs(adjSection.GetUnits() - section.GetUnits()) > curMaxDelta)
-                {
-                    if (adjSection.GetUnits() > section.GetUnits())
-                    {
-                        sectionHi = adjSection;
-                        sectionLo = section;
-                        curMaxDelta = Mathf.Abs(adjSection.GetUnits() - section.GetUnits());
-                    }
-                    else
-                    {
-                        sectionHi = section;
-                        sectionLo = adjSection;
-                        curMaxDelta = Mathf.Abs(adjSection.GetUnits() - section.GetUnits());
-                    }
-                }
+    private int EnemyMagnitudeOnBorder(Section section) {
+        // Return the total number of enemies on the sections border
+        int magnitude = 0;
+        foreach (Section borderingSection in section.adjacentSectors) {
+            if (borderingSection.GetOwner() != playerID) {
+                magnitude += borderingSection.GetUnits();
             }
-            else if (!friendly && adjSection.GetOwner() != playerID && section.GetOwner() == playerID)
-            {
-                if (adjSection.GetUnits() - section.GetUnits() > curMaxDelta)
-                {
-                    sectionHi = adjSection;
-                    sectionLo = section;
-                    curMaxDelta = adjSection.GetUnits() - section.GetUnits();
+        }
+        return magnitude;
+    }
+
+    private int NumberOfBorderingEnemies(Section section) {
+        // Return the number of hostile sections that border this one
+        int magnitude = 0;
+        foreach (Section borderingSection in section.adjacentSectors) {
+            if (borderingSection.GetOwner() != playerID) {
+                magnitude += 1;
+            }
+        }
+        return magnitude;
+    }
+
+    private int MaxHostileUnitDelta(Section section) {
+        // Return the unit difference of the strongest enemy section
+        int unitDiff = 0;
+        int sectionUnitStrength = section.GetUnits();
+        foreach (Section borderingSection in section.adjacentSectors) {
+            if (borderingSection.GetOwner() != playerID) {
+
+                int enemySectionStrength = borderingSection.GetUnits();
+
+                if (enemySectionStrength > unitDiff && enemySectionStrength > sectionUnitStrength) {
+                    unitDiff = enemySectionStrength - sectionUnitStrength;
                 }
             }
         }
-        if (sectionHi != null && sectionLo != null && curMaxDelta != 0)
-        {
-            PairSections returnPairSections = new PairSections();
-            returnPairSections.sectionHi = sectionHi;
-            returnPairSections.sectionLo = sectionLo;
-            returnPairSections.delta = curMaxDelta;
-
-            return returnPairSections;
-        }
-        return null;
+        return unitDiff;
     }
 
-    PairSections DeltaAllFriendlyAdjacents(){
-    // Return the pair of sections based on the global max delta between two sections owned by the neutral AI
-        Section[] sections = GameObject.Find("Sectors").GetComponentsInChildren<Section>();
-        PairSections maxPair = null;
-        foreach (var sect in sections){
-            if (sect.GetOwner() == playerID) {
-                PairSections curPair = DeltaAdjacents(sect);
-                if (curPair != null)
-                {
-                    if (maxPair == null)
-                    {
-                        maxPair = curPair;
-                    }
-                    else if (curPair.delta > maxPair.delta)
-                    {
-                        maxPair = curPair;
-                    }
+    private int MaxFriendlyUnitDelta(Section section) {
+        // Return the unit difference of the strongest enemy section
+        int unitDiff = 0;
+        int sectionUnitStrength = section.GetUnits();
+        foreach (Section borderingSection in section.adjacentSectors) {
+            if (borderingSection.GetOwner() == playerID) {
+
+                int otherSectionStrength = borderingSection.GetUnits();
+
+                if (otherSectionStrength > unitDiff && otherSectionStrength > sectionUnitStrength) {
+                    unitDiff = otherSectionStrength - sectionUnitStrength;
                 }
             }
-            
         }
-        if (maxPair != null){
-            return maxPair;
-        }
-        return null;
+        return unitDiff;
     }
 
-    PairSections[] DeltaAllThreats(){
-        // Iterate over friendly sectors checking for adjacent enemy sectors
-        // Return the top 10 worst offenders 
-        Section[] sections = GameObject.Find("Sectors").GetComponentsInChildren<Section>();
-        var pairs = new List<PairSections>();
-        foreach (var sect in sections)
-        {
-            PairSections curAdj = DeltaAdjacents(sect, false);
-            if (curAdj != null){
-                pairs.Add(curAdj);
+    private int NumberOfFriendlySectors() {
+        int magnitude = 0;
+        foreach (Section section in sections) {
+            if (section.GetOwner() == playerID) {
+                magnitude += 1;
             }
-            
         }
-        pairs.Sort();
+        return magnitude;
+    }
 
+    private int AvgFriendlyStrength() {
+        int totalUnits = 0;
+        foreach (Section section in sections) {
+            if (section.GetOwner() == playerID) {
+                totalUnits += section.GetUnits();
+            }
+        }
+        return totalUnits / NumberOfFriendlySectors();
+    }
+
+    private bool Reinforce(Section section) {
         
-        int maxBound = 10;
-        if (pairs.Count < 10){
-            maxBound = pairs.Count;
-        }
-        PairSections[] returnPairs = new PairSections[maxBound];
-        for (var i = 0; i < maxBound || maxBound == 0; i++){
-            returnPairs[i] = pairs[i];
-        }
-        if (returnPairs.Length != 0){
-            return returnPairs;
-        }
-        return null;
-    }
+        // Must be < 1
+        float partialMoveCoeff = 0.7f;
 
-    OhBabyATriple FindFirstValidReinforce(PairSections[] sections)
-    {
-        // Find the first pair of sectors where one can reinforce another to mitigate a threat
 
-       // sections: array of 10 sections which have high threat level
-        foreach (var sect in sections){
-            // It is implied by previous logic that sectionLo is the friendly sector
-            // It is implied by previous logic that sectionHi is the enemy sector
-            PairSections maxAvailableReinforce = DeltaAdjacents(sect.sectionLo);
-            if (maxAvailableReinforce != null){
-                if (maxAvailableReinforce.delta + maxAvailableReinforce.sectionLo.GetUnits() > sect.sectionHi.GetUnits())
-                {
-                    int toMove = (sect.sectionHi.GetUnits() - sect.sectionLo.GetUnits()) + 1;
-                    //If break; panic first; check here second
+        foreach  (Section adjsection in section.adjacentSectors) {
+            // Check neighbour is friendly
+            if (adjsection.GetOwner() == playerID) {
+                int curUnits = section.GetUnits();
+                int numAdjUnits = adjsection.GetUnits();
+                int reqUnits = MaxHostileUnitDelta(section) - curUnits;
+                int enemyMagForAdj = MaxHostileUnitDelta(adjsection);
 
-                    OhBabyATriple returnTriple = new OhBabyATriple();
-                    returnTriple.source = maxAvailableReinforce.sectionHi;
-                    returnTriple.destination = sect.sectionLo;
-                    /*
-                    returnTriple.enemy = sect.sectionHi;
-                    */
-                    returnTriple.toMove = toMove;
-                    return returnTriple;
+                // No threats to neighbour, move as many as needed
+                if (NumberOfBorderingEnemies(adjsection) == 0) {
+                    // The neighbour has all the units required
+                    if (numAdjUnits - 1 > reqUnits) {
+                        MakeMove(adjsection, section, reqUnits);
+                        return true;
+                    }
+                // The neighbour has units to spare
+                } else if (enemyMagForAdj < numAdjUnits) {
+                    // The neighbour has all the required units
+                    if ((numAdjUnits - enemyMagForAdj) + 1 > reqUnits + enemyMagForAdj) {
+                        MakeMove(adjsection, section, reqUnits);
+                        return true;
+                    // There were sufficent units to make a 'partial' reinforce move
+                    } else if (((numAdjUnits - enemyMagForAdj) + 1) > ((reqUnits + enemyMagForAdj) * partialMoveCoeff)) {
+                        int toMove = (int)((numAdjUnits - enemyMagForAdj) * partialMoveCoeff);
+                        Debug.Assert(toMove < numAdjUnits, "Attempted to move more units than existed!");
+
+                        MakeMove(adjsection, section, toMove);
+                        return true;
+                    }
                 }
             }
         }
-        return null;
+        return false;
     }
 
+    private bool Balance(Section section) {
+        int maxDelta = MaxFriendlyUnitDelta(section);
 
-    public void DecideMove(){
-        // Attempt Reinforce vuln sectors
-        Debug.Log("#PREINFORCE");
-        Debug.Log("PreCalc Threats");
-        PairSections[] threatPairs = DeltaAllThreats();
-
-        /* 10 PairSections
-         * Where Hi is enemy and Lo is friendly
-         * Sorted by threat
-         * Non-Null for every element
-         */
-        // TEST BEGIN
-        Debug.Assert(threatPairs.Length > 0 && threatPairs.Length <= 10);
-        Debug.Assert(threatPairs != null);
-        foreach (var pair in threatPairs)
-        {
-            Debug.Assert(pair != null);
-            Debug.Assert(pair.sectionHi != null);
-            Debug.Assert(pair.sectionLo != null);
-            Debug.Assert(pair.sectionHi.GetOwner() != 3);
-            Debug.Assert(pair.sectionLo.GetOwner() == 3);
-        }
-        // TEST END
-        Debug.Log("PreCalc Friendlies");
-        PairSections maxDeltaPairSections = DeltaAllFriendlyAdjacents();
-        /* Delta > 0
-         * Non Null
-         * Hi friendly
-         * Lo friendly
-         * 
-         */
-        //  TEST BEGIN
-        Debug.Assert(maxDeltaPairSections.delta > 0);
-        Debug.Assert(maxDeltaPairSections != null);
-        Debug.Assert(maxDeltaPairSections.sectionHi != null);
-        Debug.Assert(maxDeltaPairSections.sectionLo != null);
-        Debug.Assert(maxDeltaPairSections.sectionHi.GetOwner() == 3);
-        Debug.Assert(maxDeltaPairSections.sectionLo.GetOwner() == 3);
-        // TEST END
-        bool moveMade = false;
-
-        if (threatPairs != null && !moveMade) {
-            OhBabyATriple firstValidTriple = FindFirstValidReinforce(threatPairs);
-            if (firstValidTriple != null) {
-                DoMove(firstValidTriple.source, firstValidTriple.destination, firstValidTriple.toMove);
-                moveMade = true;
-                Debug.Log("REINFORCE");
+        foreach (Section adjSection in section.adjacentSectors) {
+            // Check neighbour is friendly
+            if (adjSection.GetOwner() == playerID) {
+                int adjStrength = adjSection.GetUnits();
+                if (adjStrength == maxDelta) {
+                    Debug.Assert(adjStrength > section.GetUnits());
+                    int delta = adjStrength - section.GetUnits();
+                    MakeMove(adjSection, section, delta);
+                    return true;
+                }
             }
         }
-        if (maxDeltaPairSections != null && !moveMade) {
-            // Balance friendly sectors
-            if (maxDeltaPairSections.delta > 2) {
-                int unitsToMove = Mathf.FloorToInt(maxDeltaPairSections.delta / 2);
-                DoMove(maxDeltaPairSections.sectionHi, maxDeltaPairSections.sectionLo, unitsToMove);
-                moveMade = true;
-                Debug.Log("BALANCE");
+        return false;
+    }
+
+    private void MakeMove(Section source, Section destination, int amount) {
+        source.SetUnits(source.GetUnits() - amount);
+        source.FlashSelf();
+        destination.SetUnits(destination.GetUnits() + amount);
+        destination.FlashSelf();
+    }
+
+    public void DecideMove() {
+        // Method called to perform a AI turn
+
+        // Ordered List to aid in determining move
+        OrderedList list = new OrderedList(NumberOfFriendlySectors());
+
+        // Global calculations
+        int fAvg = AvgFriendlyStrength();
+
+        foreach (Section section in sections) {
+
+            // Local calculations
+            int eMag = EnemyMagnitudeOnBorder(section);
+            int eBor = NumberOfBorderingEnemies(section);
+            int eDel = MaxHostileUnitDelta(section);
+            int fDel = MaxFriendlyUnitDelta(section);
+
+            // Threat Heuristic
+            int threatHeuristic = (5 * eDel) + (4 * eMag) + (3 * eBor);
+
+            // Balance Heuristic
+            int balanceHeuristic = 0;
+
+            if (fAvg - fDel > 0) {
+                balanceHeuristic = (fAvg - fDel);
             }
+
+            // Poppulate ordered list
+            list.AddItem(section, threatHeuristic, eDel, balanceHeuristic, fDel);
         }
-        if (!moveMade){
-            // Else, end turn
-            Debug.Log("ELSE END");
-            moveMade = true;
+
+        if (Reinforce(list.GetMaxThreat().section)) {
+            Debug.Log("AI Performed Reinforce action");
+        }
+        else if (Balance(list.GetMaxBalance().section)) {
+            Debug.Log("AI Performed Balance action");
+        }
+        else {
+            Debug.Log("AI Performed no action");
         }
         game.NextTurn();
     }
-
-    void DoMove(Section source, Section destination, int toMove){
-        source.SetUnits(source.GetUnits() - toMove);
-        destination.SetUnits(destination.GetUnits() + toMove);
-    }
 }
 
-class PairSections : IComparable<PairSections>
-{
-    public Section sectionHi;
-    public Section sectionLo;
-    public int delta = 0;
+class OrderedList {
+    // A data type for retrieving sections based on several criteria
 
-    int IComparable<PairSections>.CompareTo(PairSections obj2){
-        if (delta > obj2.delta){
-            return 1;
-        } else if (obj2.delta > delta){
-            return -1;
-        } else {
-            return 0;
+    private int numberFriendlySectors;
+    private ListItem[] list;
+    private int listPointer;
+
+    public OrderedList(int numberFriendlySectors) {
+        // Constructor
+        this.numberFriendlySectors = numberFriendlySectors;
+        this.list = new ListItem[numberFriendlySectors];
+        this.listPointer = 0;
+    }
+
+    public bool AddItem(Section section, int threatHeuristic, int threatDelta, int balanceHeuristic, int balanceDelta) {
+        // Add a new item to the ordered list
+        if (listPointer >= numberFriendlySectors) {
+            // List is full (Shouldn't ever occur)
+            return false;
         }
+
+        list[listPointer] = new ListItem(section, threatHeuristic, threatDelta, balanceHeuristic, balanceDelta);
+        return true;
+
+
+    }
+
+    public ListItem GetMaxThreat() {
+        // Returns the associated data for the item with the greatest threat heuristic
+        int curMaxValue = 0;
+        ListItem curMax = null;
+
+        foreach (ListItem item in list) {
+            if (curMax == null || curMax.threatHeuristic > curMaxValue) {
+                curMax = item;
+                curMaxValue = item.threatHeuristic;
+            }
+        }
+        return curMax;
+    }
+
+    public ListItem GetMaxBalance() {
+        // Returns the associated data for the item with the greatest balance heuristic
+        int curMaxValue = 0;
+        ListItem curMax = null;
+
+        foreach (ListItem item in list) {
+            if (curMax == null || curMax.balanceHeuristic > curMaxValue) {
+                curMax = item;
+                curMaxValue = curMax.balanceHeuristic;
+            }
+        }
+        return curMax;
+
     }
 }
 
-class OhBabyATriple
-{
-    //Mom get the camera
-    public Section source;
-    public Section destination;
-    /*
-    public Section enemy;
-    */
-    public int toMove;
+class ListItem {
+    // A data type for storing section heuristic data
+    public int threatHeuristic;
+    public int threatDelta;
+    public int balanceHeuristic;
+    public int balanceDelta;
+    public Section section;
+
+    public ListItem(Section section, int threatHeuristic, int threatDelta, int balanceHeuristic, int balanceDelta) {
+        this.threatHeuristic = threatHeuristic;
+        this.threatDelta = threatDelta;
+        this.balanceHeuristic = balanceHeuristic;
+        this.balanceDelta = balanceDelta;
+        this.section = section;
+    }
 }

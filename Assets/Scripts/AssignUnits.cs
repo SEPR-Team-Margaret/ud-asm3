@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AssignUnits : MonoBehaviour {
+
+    /* For clarity, the following fields were renamed:
+     * 
+     *      Sections    ->  sectors
+     *      picked      ->  assignedSectors
+     * 
+     * To support new features, the 'game' field was added
+     */
 	
     public GameObject[] sectors; 					//Declare Sections publicly so they can be assigned in editor 
     private List<int> assignedSectors = new List<int>();		//Define a list of picked sections so that the same section will
@@ -10,31 +18,57 @@ public class AssignUnits : MonoBehaviour {
 	
     // Use this for initialization					//not be assigned twice.
 	void Start () {
-        
-        System.Random random = new System.Random ();	//To start with every, section is assigned to Player 3, 
-		
-        foreach (GameObject sector in sectors) { 		//the unbiased AI, with a random number of units between 1 and 10.
 
-            int units = random.Next (1,25);
+        /* For clarity, the following fields were renamed:
+         * 
+         *      R2      ->  random
+         *      Sect    ->  sector
+         *      RUnits  ->  units
+         */
 
-            sector.BroadcastMessage ("SetOwner", 3); 		
-            sector.BroadcastMessage ("SetUnits",units);
-		}
-                                                    //After all sections are under player 3's contol,
-		AssignPlayer (1, 3); 						//Player 1 is assigned 3 sections, with 25 units each.
-		AssignPlayer (2, 3);						//Player 2 is also assigned 3 sections, with 25 units each.
+        System.Random random = new System.Random ();    //To start with every, section is assigned to AI, 
+
+        foreach (GameObject sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
+
+            // max number of units that the neutral AI's sector can
+            // start with was increased from 11 to 25
+            int units = random.Next(1, 25);
+
+            sector.BroadcastMessage("SetOwner", Data.RealPlayers + 1);
+            sector.BroadcastMessage("SetUnits", units);
+        }
+                                                    //After all sections are under AI's contol,
+
+        for (int i = 1; i <= Data.RealPlayers; i++) {
+            AssignPlayer(i, 3);
+        }
 		SpawnPVC();
 	}
 
-    void AssignPlayer(int player, int sectors){ 			//This is the function that takes an integer representing the player
+
+    void AssignPlayer(int player, int numberOfSectors){ 			//This is the function that takes an integer representing the player
 		
+        /* For clarity, the parameter 'sections' was renamed 'numberOfSectors',
+         * the following fields were renamed:
+         * 
+         *      Rand    ->  random
+         *      RSect   ->  sectorID
+         *      
+         * and the obselete field 'pickedB' was removed
+         */
+
         System.Random random = new System.Random (); 			//and a number of sections to assign to that player.
 		int i = 0;
 
-        while (i < sectors) { 								//Then iteratively...
+        while (i < numberOfSectors) { 								//Then iteratively...
 			
             int sectorID = random.Next(this.sectors.Length);       //picks a random section
 			
+            /* The construct which was previously used to test
+             * whether or not a sector had already been assigned
+             * has been replaced by a .Contains operation on the
+             * list of assigned sectors
+             */
             if (!assignedSectors.Contains(sectorID)) { 									//and if it has not been assigned yet
 				this.sectors[sectorID].BroadcastMessage ("SetOwner", player); 	//Assigns it to the player,
 				this.sectors[sectorID].BroadcastMessage ("SetUnits", 25);		//Sets the number of units on that point to 25,
@@ -44,15 +78,20 @@ public class AssignUnits : MonoBehaviour {
 		}
 	} 
 	
+    /* The similarities of methods 'P1TurnUnits' and 'P2TurnUnits'
+     * have been abstracted to the 'AllocateNewUnits' method, and the
+     * original methods have been replaced by the methods
+     * 'AllocatePlayer1NewUnits' and 'AllocatePlayer2NewUnits'
+     */ 
+
     void AllocateNewUnits(int player) {
 
-        foreach (GameObject sector in this.sectors)
+        foreach (GameObject sector in sectors)
         {
             sector.BroadcastMessage("AllocateNewUnits", player);
         }
 
     }
-
 
     public void AllocatePlayer1NewUnits()
 	{ 					
@@ -63,8 +102,13 @@ public class AssignUnits : MonoBehaviour {
 	{ 
         AllocateNewUnits(2);
 	}
-     
-	public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
+
+    public void AllocatePlayer3NewUnits() {
+        AllocateNewUnits(3);
+    }
+
+
+    public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
 
 		System.Random random = new System.Random (); 			//and a number of sections to assign to that player.
 		int i = 0;
