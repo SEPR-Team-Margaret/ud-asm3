@@ -45,6 +45,10 @@ public class Game : MonoBehaviour {
         return currentTurn;
     }
 
+    public void SetTurn(int turn) {
+        currentTurn = turn;
+    }
+
     public void NextTurn(){
         currentTurn = currentTurn + 1;
 		SpawnNewUnits ();
@@ -83,8 +87,16 @@ public class Game : MonoBehaviour {
     public void PassHadUpdate(){
         hadUpdate = true;
     }
-		
-	// On input, break routine and restart itself
+
+    public void SaveGame() {
+        SaveGameHandler.SaveGame();
+    }
+
+    public void LoadGame() {
+
+    }
+
+    // On input, break routine and restart itself
     IEnumerator DemoModeRoutine (){
         int timeoutTimer = 0;
         while (!hadUpdate && timeoutTimer < (60 * 5))

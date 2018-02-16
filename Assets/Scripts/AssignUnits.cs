@@ -12,7 +12,7 @@ public class AssignUnits : MonoBehaviour {
      * To support new features, the 'game' field was added
      */
 	
-    public GameObject[] sectors; 					//Declare Sections publicly so they can be assigned in editor 
+    public Section[] sectors; 					//Declare Sections publicly so they can be assigned in editor 
     private List<int> assignedSectors = new List<int>();		//Define a list of picked sections so that the same section will
 	private Game game;
 	
@@ -28,7 +28,7 @@ public class AssignUnits : MonoBehaviour {
 
         System.Random random = new System.Random ();    //To start with every, section is assigned to AI, 
 
-        foreach (GameObject sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
+        foreach (Section sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
 
             // max number of units that the neutral AI's sector can
             // start with was increased from 11 to 25
@@ -86,7 +86,7 @@ public class AssignUnits : MonoBehaviour {
 
     void AllocateNewUnits(int player) {
 
-        foreach (GameObject sector in sectors)
+        foreach (Section sector in sectors)
         {
             sector.BroadcastMessage("AllocateNewUnits", player);
         }

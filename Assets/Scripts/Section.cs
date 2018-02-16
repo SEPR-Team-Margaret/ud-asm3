@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +49,7 @@ public class Section : MonoBehaviour {
     private Text landmarkNameText;          //Define the text component for the game object above
     public string landmarkNameString;             //Publicly define the name of the landmark in current sector (so it can be assigned in editor if there is one)
 
-	public bool PVCHere;
+    public bool PVCHere;
 
     // Use this for initialization
     void Start() {
@@ -160,7 +161,7 @@ public class Section : MonoBehaviour {
     }
 
 
-    void SetOwner(int x) {
+    public void SetOwner(int x) {
         owner = x;              //When this function is called it sets the owner of the section to whatever it is passed
     }
 
