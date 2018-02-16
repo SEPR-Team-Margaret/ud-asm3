@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public static class SaveGameHandler {
 
 	public static void SaveGame() {
+        // Serializes the game state and writes it to a file
 
         string saveName = Application.persistentDataPath + GetNextSaveGameName();
 
@@ -31,9 +32,11 @@ public static class SaveGameHandler {
     }
 
     public static void LoadGame(int slotID) {
+        // Reads a serialized game state file and restores the game state
 
         string fileName = Application.persistentDataPath + "saveGame" + PadZeros(slotID) + slotID + ".ud.bin";
 
+        // Verify that the requested save game exists
         if (!File.Exists(fileName)) InitializePersistentData();
         else {
 
@@ -46,13 +49,17 @@ public static class SaveGameHandler {
 
                 SaveGame saveGame = (SaveGame)data;
 
+                // Restore global data
                 Data.RealPlayers = saveGame.RealPlayers;
                 Data.IsDemo = saveGame.IsDemo;
 
+                // Open game scene
                 SceneManager.LoadScene("Mappit.unity");
 
                 Section[] sections = GameObject.Find("EventManager").GetComponent<AssignUnits>().sectors;
 
+
+                // Restore section data
                 foreach (Section liveSection in sections) {
                     foreach (SerialSection savedSection in saveGame.Sections) {
                         if (savedSection.landmarkNameString == liveSection.landmarkNameString) {
@@ -66,6 +73,7 @@ public static class SaveGameHandler {
 
                 Game game = GameObject.Find("EventManager").GetComponent<Game>();
 
+                // Restores the current turn value
                 game.SetTurn(saveGame.CurrentTurn);
 
             } else {
@@ -75,6 +83,7 @@ public static class SaveGameHandler {
     }
 
     private static void InitializePersistentData() {
+        // Set defaults for if file loading fails
         Data.RealPlayers = 2;
         Data.IsDemo = false;
 
@@ -82,6 +91,7 @@ public static class SaveGameHandler {
     }
 
     private static string GetNextSaveGameName() {
+        // Generate the file name for the next save game 'slot'
         string[] filePaths = Directory.GetFiles(@Application.persistentDataPath, "*.ud.bin", SearchOption.TopDirectoryOnly);
         int lastSlotUsed = 0;
         foreach (string file in filePaths) {
@@ -97,11 +107,11 @@ public static class SaveGameHandler {
             }
         }
 
-        return "saveGame00" + PadZeros(lastSlotUsed) + lastSlotUsed.ToString() + ".ud.bin";
+        return "saveGame" + PadZeros(lastSlotUsed) + lastSlotUsed.ToString() + ".ud.bin";
 
     }
 
-    private static string PadZeros(int number) {
+    private static string PadZeros(int number) { 
         if (number >= 100) {
             return "";
         } else if (number >= 10) {
@@ -112,6 +122,8 @@ public static class SaveGameHandler {
     }
 
     private static SerialSection[] MakeSerialSections(Section[] sections) {
+        // Creates a serializable data structure which holds key data about sections
+
         SerialSection[] sSections = new SerialSection[sections.Length];
         int index = 0;
         foreach (Section section in sections) {
