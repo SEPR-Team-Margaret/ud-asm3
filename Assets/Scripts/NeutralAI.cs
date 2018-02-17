@@ -87,6 +87,7 @@ public class NeutralAI : MonoBehaviour {
                 totalUnits += section.GetUnits();
             }
         }
+
         return totalUnits / NumberOfFriendlySectors();
     }
 
@@ -159,42 +160,45 @@ public class NeutralAI : MonoBehaviour {
     public void DecideMove() {
         // Method called to perform a AI turn
 
-        // Ordered List to aid in determining move
-        OrderedList list = new OrderedList(NumberOfFriendlySectors());
+        if (NumberOfFriendlySectors() != 0) {
 
-        // Global calculations
-        int fAvg = AvgFriendlyStrength();
+            // Ordered List to aid in determining move
+            OrderedList list = new OrderedList(NumberOfFriendlySectors());
 
-        foreach (Section section in sections) {
+            // Global calculations
+            int fAvg = AvgFriendlyStrength();
 
-            // Local calculations
-            int eMag = EnemyMagnitudeOnBorder(section);
-            int eBor = NumberOfBorderingEnemies(section);
-            int eDel = MaxHostileUnitDelta(section);
-            int fDel = MaxFriendlyUnitDelta(section);
+            foreach (Section section in sections) {
 
-            // Threat Heuristic
-            int threatHeuristic = (5 * eDel) + (4 * eMag) + (3 * eBor);
+                // Local calculations
+                int eMag = EnemyMagnitudeOnBorder(section);
+                int eBor = NumberOfBorderingEnemies(section);
+                int eDel = MaxHostileUnitDelta(section);
+                int fDel = MaxFriendlyUnitDelta(section);
 
-            // Balance Heuristic
-            int balanceHeuristic = 0;
+                // Threat Heuristic
+                int threatHeuristic = (5 * eDel) + (4 * eMag) + (3 * eBor);
 
-            if (fAvg - fDel > 0) {
-                balanceHeuristic = (fAvg - fDel);
+                // Balance Heuristic
+                int balanceHeuristic = 0;
+
+                if (fAvg - fDel > 0) {
+                    balanceHeuristic = (fAvg - fDel);
+                }
+
+                // Poppulate ordered list
+                list.AddItem(section, threatHeuristic, eDel, balanceHeuristic, fDel);
             }
 
-            // Poppulate ordered list
-            list.AddItem(section, threatHeuristic, eDel, balanceHeuristic, fDel);
-        }
-
-        if (Reinforce(list.GetMaxThreat().section)) {
-            Debug.Log("AI Performed Reinforce action");
-        }
-        else if (Balance(list.GetMaxBalance().section)) {
-            Debug.Log("AI Performed Balance action");
-        }
-        else {
-            Debug.Log("AI Performed no action");
+            if (Reinforce(list.GetMaxThreat().section)) {
+                Debug.Log("AI Performed Reinforce action");
+            }
+            else if (Balance(list.GetMaxBalance().section)) {
+                Debug.Log("AI Performed Balance action");
+            }
+            else {
+                Debug.Log("AI Performed no action");
+            }
         }
         game.NextTurn();
     }
