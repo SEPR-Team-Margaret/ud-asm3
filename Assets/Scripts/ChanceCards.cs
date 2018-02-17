@@ -17,12 +17,17 @@ public class ChanceCards : MonoBehaviour {
     private GameObject cardImage;
     public Sprite[] cardSprites;
 	
+    public Text chanceCardsEffect;                                  // define the variable to display the effects of the chance cards used
+    private string targetSectors;
+    private string effect;
+
 	void Start(){
 		gameManager = GameObject.Find("EventManager"); 				//Find the gameobject used to manage events
 		game = gameManager.GetComponent<Game>();
 		section = gameManager.GetComponent<Section>();
 		chanceCardsText = GameObject.Find("CardText").GetComponent<Text>();
         cardImage = GameObject.Find("CardImage");
+        chanceCardsEffect = GameObject.Find("CardEffect").GetComponent<Text>();
 	}
 	
 	void Update(){
@@ -108,6 +113,9 @@ public class ChanceCards : MonoBehaviour {
                 }
             }
         }
+
+        chanceCardsEffect.text = "CHANCE!\n" + targetSectors + " sectors\n" + effect;
+
     }
 	
 	void FriendlySectors(){
@@ -116,14 +124,22 @@ public class ChanceCards : MonoBehaviour {
 		float rand = Random.Range(0f, 1f);
 		float negChance = 0.1f;
 		
-		if (rand < negChance ) {
-			units *= -1;
-		}
+        if (rand < negChance)
+        {
+            this.effect = "weakened";
+            units *= -1;
+        }
+        else
+        {
+            this.effect = "fortified";
+        }
+
 		foreach (var sect in sections) {
 			if (sect.GetOwner() == game.GetTurn()) {
 				sect.AddUnits(units);
 			}
 		}
+        this.targetSectors = "Friendly";
 	}
 	
 	void AllSectors(){
@@ -132,12 +148,20 @@ public class ChanceCards : MonoBehaviour {
 		float rand = Random.Range(0f, 1f);
 		float negChance = 0.1f;
 		
-		if (rand < negChance ) {
-			units *= -1;
-		}
+        if (rand < negChance)
+        {
+            this.effect = "weakened";
+            units *= -1;
+        }
+        else
+        {
+            this.effect = "fortified";
+        }
+
 		foreach (var sect in sections) {
 				sect.AddUnits(units);
 		}
+        this.targetSectors = "All";
 	}
 	
 	void EnemySectors(){
@@ -146,14 +170,22 @@ public class ChanceCards : MonoBehaviour {
 		float rand = Random.Range(0f, 1f);
 		float negChance = 0.1f;
 		
-		if (rand < negChance ) {
-			units *= -1;
-		}
+        if (rand < negChance)
+        {
+            this.effect = "fortified";
+            units *= -1;
+        }
+        else
+        {
+            this.effect = "weakened";
+        }
+
 		foreach (var sect in sections) {
 			if (sect.GetOwner() != game.GetTurn()) {
 				sect.AddUnits(units);
 			}
 		}
+        this.targetSectors = "Enemy";
 	}
 }
 
