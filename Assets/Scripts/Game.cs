@@ -51,7 +51,6 @@ public class Game : MonoBehaviour {
 
     public void NextTurn(){
         currentTurn = currentTurn + 1;
-		SpawnNewUnits ();
         // Loops back to player 1 once last player is done
         if (currentTurn > Data.RealPlayers + 1){
             currentTurn = 1;
@@ -59,20 +58,12 @@ public class Game : MonoBehaviour {
 		else if (currentTurn == Data.RealPlayers + 1) {
             neutralAI.DecideMove();
         }
+
+        assignUnits.AllocateNewUnits(currentTurn);
+
 		ResetTimer ();
         // if sudden death mode is active, destroy some units along borders
         suddenDeath.KillUnitsOnBorderSectors();
-    }
-
-	//spawning new units for each turn - REPLACING IN GAME BUTTONS
-	public void SpawnNewUnits(){
-		if (currentTurn == 1) {
-			assignUnits.AllocatePlayer2NewUnits();
-		} else if (currentTurn == 2) {
-			assignUnits.AllocatePlayer1NewUnits();
-		} else if (currentTurn == 3 && Data.RealPlayers == 2) {
-            assignUnits.AllocatePlayer1NewUnits();
-        }
     }
 
 	public void ResetTimer() { //resets timer

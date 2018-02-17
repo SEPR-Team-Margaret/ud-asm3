@@ -84,7 +84,7 @@ public class AssignUnits : MonoBehaviour {
      * 'AllocatePlayer1NewUnits' and 'AllocatePlayer2NewUnits'
      */ 
 
-    void AllocateNewUnits(int player) {
+    public void AllocateNewUnits(int player) {
 
         foreach (Section sector in sectors)
         {
@@ -108,10 +108,9 @@ public class AssignUnits : MonoBehaviour {
     }
 
 
-    public void SpawnPVC(){ 			//This is the function that takes an integer representing the player
-
-		System.Random random = new System.Random (); 			//and a number of sections to assign to that player.
-		int i = 0;
+    public void SpawnPVC(){ 			
+        
+		System.Random random = new System.Random (); 
 
 		int sectorID = random.Next(this.sectors.Length);       //picks a random section
 		this.sectors[sectorID].BroadcastMessage("spawnPVC"); //sets boolean for PVC to true
