@@ -7,6 +7,7 @@ public class PVC : MonoBehaviour
     public static int caughtPVC = 0;
     public Vector3 vector;
     public GameObject BuffAwarded;
+
     // Use this for initialization
     void Start()
     {

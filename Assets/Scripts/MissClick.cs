@@ -4,46 +4,41 @@ using UnityEngine;
 
 public class MissClick : MonoBehaviour
 {
-    public static int missedPVC = 0;
-    public int testresult = 1;
-    public GameObject testforstartmenu;
-    public GameObject missedclick;
-    public GameObject buffawarded;
+    public bool win = false;
 
-    // Use this for initialization
-    void Start()
-    {
-   //     missedclick = GameObject.Find("BuffNotAwarded!");
-     //   missedclick.gameObject.SetActive(false);
-    }
+    public GameObject startMenu;
+    public GameObject buffAwarded;
+    public GameObject buffNotAwarded;
+    public GameObject PVC;
+
     
     void OnMouseDown()
     {
-        testforstartmenu = GameObject.Find("StartButton");
-        if (testforstartmenu == true)
+        if (startMenu.activeInHierarchy)
         {
             return;
-        }
-        else
-        {
-            testresult = 1;
         }
 
-        buffawarded = GameObject.Find("BuffAwarded");
-        if (buffawarded == true)
+        if (buffAwarded.activeInHierarchy)
         {
+            win = true;
             return;
         }
-        if (testresult == 1) 
-        {
-            gameObject.SetActive(false);
-            missedclick.gameObject.SetActive(true);
-        }
+
+        win = false;
+        gameObject.SetActive(false);
+        buffNotAwarded.gameObject.SetActive(true);
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-    
+
+    public void Initialize() {
+
+        startMenu.SetActive(true);
+        buffAwarded.SetActive(false);
+        buffNotAwarded.SetActive(false);
+        PVC.SetActive(false);
+
+        win = false;
+
     }
+
 }

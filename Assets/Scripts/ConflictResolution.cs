@@ -300,15 +300,18 @@ public class ConflictResolution : MonoBehaviour {
             defendingSector.BroadcastMessage ("SetUnits", defendingUnits); //Update units on defending sector to the remaining number of defending units
 			
             if (attackingUnits > 0) { 							//If there are any attacking units left - attack has won
-				defendingSector.BroadcastMessage ("SetUnits", attackingUnits); 		//Update units on defending sector to the remaining number of attacking units
+				
+                defendingSector.BroadcastMessage ("SetUnits", attackingUnits); 		//Update units on defending sector to the remaining number of attacking units
 				defendingSector.BroadcastMessage ("SetOwner", attackingPlayer);		//Update owner on defending sector to the owner of the attacking sector
-				if (attackingPlayer == 1) {											//Add one chance card to the attacking player
+				
+                if (attackingPlayer == 1) {											//Add one chance card to the attacking player
 					chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
 					if (defendingSector.PVCHere == true) {
                         chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
 						//PLAY MINI GAME FOR PLAYER 1
                         if (PlayMinigame(1))
                         {
+                            // if player wins minigame, award another chance card
                             chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
                         }
                         defendingSector.PVCHere = false;
@@ -322,18 +325,21 @@ public class ConflictResolution : MonoBehaviour {
 						//PLAY MINI GAME FOR PLAYER 2
                         if (PlayMinigame(2))
                         {
+                            // if player wins minigame, award another chance card
                             chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
                         }
 						defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
-				} else if (attackingPlayer == 3 && Data.RealPlayers == 3) {
+				} 
+                else if (attackingPlayer == 3 && Data.RealPlayers == 3) {
                     chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                     if (defendingSector.PVCHere == true) {
                         chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                         //PLAY MINI GAME FOR PLAYER 3
                         if (PlayMinigame(3))
                         {
+                            // if player wins minigame, award another chance card
                             chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                         }
                         defendingSector.PVCHere = false;
@@ -390,6 +396,14 @@ public class ConflictResolution : MonoBehaviour {
 
         Debug.Log("starting minigame");
 
+        minigame.SetActive(true);
+        minigame.GetComponentInChildren<MissClick>().Initialize();
+
+        // wait until the minigame finishes
+        WaitForMinigame();
+
+        Debug.Log("minigame finished");
+
 
         // re-enable all interactable elements of the main game:
 
@@ -404,9 +418,25 @@ public class ConflictResolution : MonoBehaviour {
         helpButton.interactable = true;
         chanceCardButton.interactable = true;
 
-        Debug.Log("minigame finished");
 
         // return the outcome of the minigame
-        return true;
+        return minigame.GetComponentInChildren<MissClick>().win;
+    }
+
+    IEnumerator WaitForMinigame() {
+
+        yield return new WaitWhile(MinigameIsActive);
+
+    }
+
+    private bool MinigameIsActive() {
+        if (minigame.activeInHierarchy)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
