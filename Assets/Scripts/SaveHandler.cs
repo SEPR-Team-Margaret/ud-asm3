@@ -54,7 +54,7 @@ public static class SaveGameHandler {
                 Data.IsDemo = saveGame.IsDemo;
 
                 // Open game scene
-                SceneManager.LoadScene("Mappit.unity");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
 
                 Section[] sections = GameObject.Find("EventManager").GetComponent<AssignUnits>().sectors;
 
@@ -100,16 +100,16 @@ public static class SaveGameHandler {
         int lastSlotUsed = 0;
         foreach (string file in filePaths) {
             try {
-                string fileName = file.Split('.')[0];
+                string fileName = Path.GetFileName(file);
                 string slotNumberStr = fileName.Substring(8, 3);
                 int slotNumber = int.Parse(slotNumberStr);
                 Debug.Log(slotNumber);
-                if (slotNumber > lastSlotUsed) {
+                Debug.Log(lastSlotUsed);
+                if (slotNumber >= lastSlotUsed) {
                     lastSlotUsed = slotNumber + 1;
                 }
             } catch {
                 //NOP
-                Debug.Log("Test");
             }
         }
 
