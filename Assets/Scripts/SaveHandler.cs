@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ public static class SaveGameHandler {
 	public static void SaveGame() {
         // Serializes the game state and writes it to a file
 
-        string saveName = Application.persistentDataPath + GetNextSaveGameName();
+        string saveName = Application.persistentDataPath + "/" + GetNextSaveGameName();
 
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(saveName);
@@ -34,7 +34,7 @@ public static class SaveGameHandler {
     public static void LoadGame(int slotID) {
         // Reads a serialized game state file and restores the game state
 
-        string fileName = Application.persistentDataPath + "saveGame" + PadZeros(slotID) + slotID + ".ud.bin";
+        string fileName = Application.persistentDataPath + "/saveGame" + PadZeros(slotID) + slotID + ".ud.bin";
 
         // Verify that the requested save game exists
         if (!File.Exists(fileName)) InitializePersistentData();
@@ -92,18 +92,24 @@ public static class SaveGameHandler {
 
     private static string GetNextSaveGameName() {
         // Generate the file name for the next save game 'slot'
-        string[] filePaths = Directory.GetFiles(@Application.persistentDataPath, "*.ud.bin", SearchOption.TopDirectoryOnly);
+        string[] filePaths = Directory.GetFiles(@Application.persistentDataPath + "/", "*.ud.bin", SearchOption.TopDirectoryOnly);
+        foreach(string file in filePaths){
+        	 Debug.Log(file);
+        }
+        Debug.Log(@Application.persistentDataPath);
         int lastSlotUsed = 0;
         foreach (string file in filePaths) {
             try {
                 string fileName = file.Split('.')[0];
                 string slotNumberStr = fileName.Substring(8, 3);
                 int slotNumber = int.Parse(slotNumberStr);
+                Debug.Log(slotNumber);
                 if (slotNumber > lastSlotUsed) {
                     lastSlotUsed = slotNumber + 1;
                 }
             } catch {
                 //NOP
+                Debug.Log("Test");
             }
         }
 
