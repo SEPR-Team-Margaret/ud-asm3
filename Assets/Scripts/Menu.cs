@@ -54,6 +54,7 @@ public class Menu : MonoBehaviour {
 		Text playerNumText;
 		Text saveSlotText;
 		Button currentButton;
+		int numSaves = 0;
 
 		string filePath = Application.persistentDataPath + "/";
 		BinaryFormatter bf = new BinaryFormatter();
@@ -66,6 +67,8 @@ public class Menu : MonoBehaviour {
 				System.Object data = bf.Deserialize(currentFile);
 				
 				if (data is SaveGame) {
+
+					numSaves+=1;
 
 					SaveGame saveGame = (SaveGame)data;
 					
@@ -90,6 +93,8 @@ public class Menu : MonoBehaviour {
 			}
 
 		}
+		RectTransform gridRectTransform = targetGrid.GetComponent<RectTransform>();
+		gridRectTransform.offsetMin = new Vector2(gridRectTransform.offsetMin.x, (-1 * 90 * numSaves) + 820);
 	
 	}
 
