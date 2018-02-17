@@ -667,7 +667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 81722650}
   - component: {fileID: 81722651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CardUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1741,7 +1741,7 @@ GameObject:
   - component: {fileID: 292562828}
   - component: {fileID: 292562830}
   - component: {fileID: 292562829}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: CardEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2585,7 +2585,7 @@ GameObject:
   - component: {fileID: 429503302}
   - component: {fileID: 429503301}
   - component: {fileID: 429503300}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5341,7 +5341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 923532576}
   - component: {fileID: 923532577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CardImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7261,7 +7261,7 @@ MonoBehaviour:
   testresult: 0
   testforstartmenu: {fileID: 0}
   missedclick: {fileID: 0}
-  buffawarded: {fileID: 0}
+  buffawarded: {fileID: 542573755}
 --- !u!23 &1183066947
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7748,7 +7748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1245034615
 Transform:
   m_ObjectHideFlags: 0

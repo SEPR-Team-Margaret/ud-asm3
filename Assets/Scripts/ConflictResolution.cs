@@ -62,13 +62,19 @@ public class ConflictResolution : MonoBehaviour {
     private int defendingPlayer;								//Define a variable that will hold the owner of the defending sector
     private int defendingUnits; 								//Define a variable that will hold the number of units on the defending sector
 
-    private GameObject sectors;									//Define a variable that will hold the gameobject of every sector on the map
+    private GameObject[] sectors;									//Define a variable that will hold the gameobject of every sector on the map
 	public GameObject invalidNumberOfUnitsPopup;				//Publicly define a variable that is attached to the script generating a popup for if an invalid number of units is selected
 	public GameObject riskyMovePopup;							//Publicly define a variable that is attached to the script generating a popup for if a user selects an attack with low chance of success
-	
+
 	private ChanceCards chanceCards;
 	private Game game;
 	private AssignUnits assignUnits;
+
+    private Button settingsButton;
+    private Button helpButton;
+    private Button chanceCardButton;
+
+    private GameObject minigame;
 
     public int GetMode(){
         return mode;
@@ -78,7 +84,7 @@ public class ConflictResolution : MonoBehaviour {
 	void Start () {
         gameManager = GameObject.Find("EventManager"); 	//Find the gameobject used to manage events 
 
-        sectors = GameObject.FindGameObjectWithTag ("Sector"); 	//Find all gameobjects of sectors
+        sectors = GameObject.FindGameObjectsWithTag("Sector"); 	//Find all gameobjects of sectors
 		
         inputFieldObject = GameObject.Find("UnitsTextbox");  					//Find the gameobject of the input field
         inputFieldText = inputFieldObject.GetComponentInChildren<UnityEngine.UI.Text> ();//Find the text compontnt of the input field
@@ -94,6 +100,14 @@ public class ConflictResolution : MonoBehaviour {
         gameInstructions.text =  "Pick a sector to attack with..."; //Set the game instructions to tell user next action they should take
 		
 		chanceCards = GameObject.Find("CardUI").GetComponent<ChanceCards>();
+        assignUnits = this.gameObject.GetComponentInChildren<AssignUnits>();
+
+        settingsButton = GameObject.Find("SettingsButton").GetComponent<Button>();
+        helpButton = GameObject.Find("HelpButton").GetComponent<Button>();
+        chanceCardButton = GameObject.Find("CardButton").GetComponent<Button>();
+
+        minigame = GameObject.Find("Minigame");
+        minigame.SetActive(false);
 	}
 	
     /* For clarity, the parameter 'U' has been renamed 'units'
@@ -291,22 +305,37 @@ public class ConflictResolution : MonoBehaviour {
 				if (attackingPlayer == 1) {											//Add one chance card to the attacking player
 					chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
 					if (defendingSector.PVCHere == true) {
+                        chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
 						//PLAY MINI GAME FOR PLAYER 1
-						defendingSector.PVCHere = false;
+                        if (PlayMinigame(1))
+                        {
+                            chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
+                        }
+                        defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
 				} 
 				else if (attackingPlayer == 2) {
 					chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
 					if (defendingSector.PVCHere == true) {
+                        chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
 						//PLAY MINI GAME FOR PLAYER 2
+                        if (PlayMinigame(2))
+                        {
+                            chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
+                        }
 						defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
 				} else if (attackingPlayer == 3 && Data.RealPlayers == 3) {
                     chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                     if (defendingSector.PVCHere == true) {
+                        chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                         //PLAY MINI GAME FOR PLAYER 3
+                        if (PlayMinigame(3))
+                        {
+                            chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
+                        }
                         defendingSector.PVCHere = false;
                         assignUnits.SpawnPVC();
                     }
@@ -339,4 +368,45 @@ public class ConflictResolution : MonoBehaviour {
             gameManager.GetComponent<Game>().NextTurn();
         }
     } 
+
+    private bool PlayMinigame(int player) {
+        // disables the main game board, activates the minigame, re-enables
+        // the main game board, and returns whether or not the player won the minigame
+
+        // disable all interactable elements of the main game:
+        //     sectors, menu buttons, and chance card button
+
+        foreach (GameObject sector in sectors)
+        {
+            // set the sector to the IgnoreRaycast layer (index 2)
+            sector.layer = 2; 
+        }
+
+        // disable the various buttons in the main game
+        settingsButton.interactable = false;
+        helpButton.interactable = false;
+        chanceCardButton.interactable = false;
+
+
+        Debug.Log("starting minigame");
+
+
+        // re-enable all interactable elements of the main game:
+
+        foreach (GameObject sector in sectors)
+        {
+            // set the sector to its original layer (index 8)
+            sector.layer = 8;
+        }
+
+        // enable the various buttons in the main game
+        settingsButton.interactable = true;
+        helpButton.interactable = true;
+        chanceCardButton.interactable = true;
+
+        Debug.Log("minigame finished");
+
+        // return the outcome of the minigame
+        return true;
+    }
 }

@@ -13,8 +13,8 @@ public class MissClick : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        missedclick = GameObject.Find("BuffNotAwarded!");
-        missedclick.gameObject.SetActive(false);
+   //     missedclick = GameObject.Find("BuffNotAwarded!");
+     //   missedclick.gameObject.SetActive(false);
     }
     
     void OnMouseDown()
