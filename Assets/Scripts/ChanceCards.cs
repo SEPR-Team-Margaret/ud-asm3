@@ -7,7 +7,7 @@ public class ChanceCards : MonoBehaviour {
 
 	private int playerOneChanceCards = 5;							//Define a variable that will count player one's chance cards
 	private int playerTwoChanceCards = 5;							//Define a variable that will count player two's chance cards
-    private int playerThreeChanceCards = 5;                           //Define a variable that will count player two's chance cards
+    private int playerThreeChanceCards = 5;                           //Define a variable that will count player three's chance cards
 
     private Game game;
 	private Section section;
@@ -28,6 +28,13 @@ public class ChanceCards : MonoBehaviour {
 		chanceCardsText = GameObject.Find("CardText").GetComponent<Text>();
         cardImage = GameObject.Find("CardImage");
         chanceCardsEffect = GameObject.Find("CardEffect").GetComponent<Text>();
+
+        if (Data.GameFromLoaded) {
+            playerOneChanceCards = SaveGameHandler.loadedGame.ChanceCards[0];
+            playerTwoChanceCards = SaveGameHandler.loadedGame.ChanceCards[1];
+            playerThreeChanceCards = SaveGameHandler.loadedGame.ChanceCards[2];
+        }
+
 	}
 	
 	void Update(){

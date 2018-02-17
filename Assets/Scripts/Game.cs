@@ -28,6 +28,10 @@ public class Game : MonoBehaviour {
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
         }
+        if (Data.GameFromLoaded) {
+            // Restores the current turn value
+            SetTurn(SaveGameHandler.loadedGame.CurrentTurn);
+        }
     }
 
 	void Update() {

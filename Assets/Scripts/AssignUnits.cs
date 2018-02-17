@@ -28,21 +28,42 @@ public class AssignUnits : MonoBehaviour {
 
         System.Random random = new System.Random ();    //To start with every, section is assigned to AI, 
 
-        foreach (Section sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
+        if (Data.GameFromLoaded) {
+            //Do shiz
+            SaveGame loadedGame = SaveGameHandler.loadedGame;
 
-            // max number of units that the neutral AI's sector can
-            // start with was increased from 11 to 25
-            int units = random.Next(1, 25);
+            foreach (Section liveSection in sectors) {
+                foreach (SerialSection savedSection in loadedGame.Sections) {
+                    if (savedSection.landmarkNameString == liveSection.landmarkNameString) {
+                        liveSection.SetUnits(savedSection.units);
+                        liveSection.SetOwner(savedSection.owner);
+                        liveSection.PVCHere = savedSection.PVCHere;
+                    }
+                }
+            }
 
-            sector.BroadcastMessage("SetOwner", Data.RealPlayers + 1);
-            sector.BroadcastMessage("SetUnits", units);
+
+            Data.GameFromLoaded = false;
         }
-                                                    //After all sections are under AI's contol,
+        else {
 
-        for (int i = 1; i <= Data.RealPlayers; i++) {
-            AssignPlayer(i, 3);
+            foreach (Section sector in sectors) {        //the unbiased AI, with a random number of units between 1 and 10.
+
+                // max number of units that the neutral AI's sector can
+                // start with was increased from 11 to 25
+                int units = random.Next(1, 25);
+
+                sector.BroadcastMessage("SetOwner", Data.RealPlayers + 1);
+                sector.BroadcastMessage("SetUnits", units);
+            }
+            //After all sections are under AI's contol,
+
+            for (int i = 1; i <= Data.RealPlayers; i++) {
+                AssignPlayer(i, 3);
+            }
+            SpawnPVC();
         }
-		SpawnPVC();
+
 	}
 
 

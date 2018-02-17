@@ -10,6 +10,7 @@ public static class Data
 
     private static bool isDemo;
     private static int realPlayers;
+    private static bool gameFromLoaded;
 
     public static bool IsDemo
     {
@@ -29,6 +30,15 @@ public static class Data
         }
         set {
             realPlayers = value;
+        }
+    }
+
+    public static bool GameFromLoaded {
+        get {
+            return gameFromLoaded;
+        }
+        set {
+            gameFromLoaded = value;
         }
     }
 }

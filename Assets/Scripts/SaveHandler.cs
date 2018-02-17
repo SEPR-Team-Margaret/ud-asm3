@@ -9,7 +9,11 @@ using UnityEngine.SceneManagement;
 
 public static class SaveGameHandler {
 
-	public static void SaveGame() {
+    public static SaveGame loadedGame;
+
+
+
+    public static void SaveGame() {
         // Serializes the game state and writes it to a file
 
         string saveName = Application.persistentDataPath + "/" + GetNextSaveGameName();
@@ -22,6 +26,13 @@ public static class SaveGameHandler {
         saveGame.RealPlayers = Data.RealPlayers;
         saveGame.Sections = MakeSerialSections(GameObject.Find("EventManager").GetComponent<AssignUnits>().sectors);
         saveGame.CurrentTurn = GameObject.Find("EventManager").GetComponent<Game>().GetTurn();
+
+
+        ChanceCards cardObj = GameObject.Find("CardUI").GetComponent<ChanceCards>();
+        saveGame.ChanceCards = new int[3];
+        saveGame.ChanceCards[0] = cardObj.GetPlayerOneChance();
+        saveGame.ChanceCards[1] = cardObj.GetPlayerTwoChance();
+        saveGame.ChanceCards[2] = cardObj.GetPlayerThreeChance();
 
         bf.Serialize(file, saveGame);
 
@@ -49,34 +60,20 @@ public static class SaveGameHandler {
 
                 SaveGame saveGame = (SaveGame)data;
 
+                loadedGame = saveGame;
+
                 // Restore global data
                 Data.RealPlayers = saveGame.RealPlayers;
                 Data.IsDemo = saveGame.IsDemo;
 
+                Data.GameFromLoaded = true;
+
                 // Open game scene
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
 
-                Section[] sections = GameObject.Find("EventManager").GetComponent<AssignUnits>().sectors;
 
-
-                // Restore section data
-                foreach (Section liveSection in sections) {
-                    foreach (SerialSection savedSection in saveGame.Sections) {
-                        if (savedSection.landmarkNameString == liveSection.landmarkNameString) {
-                            liveSection.SetUnits(savedSection.units);
-                            liveSection.SetOwner(savedSection.owner);
-                            liveSection.PVCHere = savedSection.PVCHere;
-                        }
-                    }
-                }
-
-
-                Game game = GameObject.Find("EventManager").GetComponent<Game>();
-
-                // Restores the current turn value
-                game.SetTurn(saveGame.CurrentTurn);
-
-            } else {
+            }
+            else {
                 Debug.Log("Invalid Savegame");
             }
         }
@@ -87,7 +84,7 @@ public static class SaveGameHandler {
         Data.RealPlayers = 2;
         Data.IsDemo = false;
 
-        SceneManager.LoadScene("Mappit.unity");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private static string GetNextSaveGameName() {
@@ -145,12 +142,13 @@ public static class SaveGameHandler {
 }
 
 [Serializable]
-class SaveGame {
+public class SaveGame {
     
     [SerializeField] private bool isDemo;
     [SerializeField] private int realPlayers;
     [SerializeField] private SerialSection[] sections;
     [SerializeField] private int currentTurn;
+    [SerializeField] private int[] chanceCards;
 
     public bool IsDemo {
         get {
@@ -187,10 +185,18 @@ class SaveGame {
             currentTurn = value;
         }
     }
+    public int[] ChanceCards {
+        get {
+            return chanceCards;
+        }
+        set {
+            chanceCards = value;
+        }
+    }
 }
 
 [Serializable]
-class SerialSection {
+public class SerialSection {
     [SerializeField] public int owner;
     [SerializeField] public int units;
     [SerializeField] public string landmarkNameString;
