@@ -98,6 +98,7 @@ public class Game : MonoBehaviour {
         {
             yield return new WaitForSeconds(1);
             timeoutTimer += 1;
+            Debug.Log(timeoutTimer);
         }
         if (hadUpdate)
         {
@@ -105,7 +106,7 @@ public class Game : MonoBehaviour {
             StartCoroutine("DemoModeRoutine");
             yield break;
         }
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
 
     }
 }
