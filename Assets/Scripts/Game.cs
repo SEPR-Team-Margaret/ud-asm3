@@ -110,19 +110,26 @@ public class Game : MonoBehaviour {
 
 	public void DisableRayCast() 
 	{
-		Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
-		Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+		if (GameObject.Find("GoButton") != null) {
+			Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
+			gobutton.interactable = false;
+		}
+		if (GameObject.Find("BackButton") != null) {
+			Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+			backbutton.interactable = false;
+		}
+		if (GameObject.Find("UnitsTextbox") != null) {
+			InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
+			unitstextbox.interactable = false;
+		}
+			
 		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();
 		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();
 		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();
-		InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
 
-		gobutton.interactable = false;
-		backbutton.interactable = false;
 		cardbutton.interactable = false;
 		helpbutton.interactable = false;
 		settingsbutton.interactable = false;
-		unitstextbox.interactable = false;
 
 		foreach (Section section in sections)
 		{
@@ -133,21 +140,28 @@ public class Game : MonoBehaviour {
 			
 	}
 
-	public void EnableRayCast ()
+	public void EnableRayCast()
 	{
-		Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
-		Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+		if (GameObject.Find("GoButton") != null) {
+			Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
+			gobutton.interactable = true;
+		}
+		if (GameObject.Find("BackButton") != null) {
+			Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+			backbutton.interactable = true;
+		}
+		if (GameObject.Find("UnitsTextbox") != null) {
+			InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
+			unitstextbox.interactable = true;
+		}
+
 		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();
 		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();
 		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();
-		InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
 
-		gobutton.interactable = true;
-		backbutton.interactable = true;
 		cardbutton.interactable = true;
 		helpbutton.interactable = true;
 		settingsbutton.interactable = true;
-		unitstextbox.interactable = true;
 
 		foreach (Section section in sections)
 		{
