@@ -4,41 +4,41 @@ using UnityEngine;
 
 public class MissClick : MonoBehaviour
 {
-    public bool win = false;
+	public bool win = false;
 
-    public GameObject startMenu;
-    public GameObject buffAwarded;
-    public GameObject buffNotAwarded;
-    public GameObject PVC;
+	public GameObject startMenu;
+	public GameObject buffAwarded;
+	public GameObject buffNotAwarded;
+	public GameObject PVC;
 
-    
-    void OnMouseDown()
-    {
-        if (startMenu.activeInHierarchy)
-        {
-            return;
-        }
 
-        if (buffAwarded.activeInHierarchy)
-        {
-            win = true;
-            return;
-        }
+	void OnMouseDown()
+	{
+		if (startMenu.activeInHierarchy)
+		{
+			return;
+		}
 
-        win = false;
-        gameObject.SetActive(false);
-        buffNotAwarded.gameObject.SetActive(true);
-    }
+		if (buffAwarded.activeInHierarchy)
+		{
+			win = true;
+			return;
+		}
 
-    public void Initialize() {
+		win = false;
+		gameObject.SetActive(false);
+		buffNotAwarded.gameObject.SetActive(true);
+	}
 
-        startMenu.SetActive(true);
-        buffAwarded.SetActive(false);
-        buffNotAwarded.SetActive(false);
-        PVC.SetActive(false);
+	public void Initialize() {
 
-        win = false;
+		startMenu.SetActive(true);
+		buffAwarded.SetActive(false);
+		buffNotAwarded.SetActive(false);
+		PVC.SetActive(false);
 
-    }
+		win = false;
+
+	}
 
 }
