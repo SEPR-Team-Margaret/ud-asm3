@@ -112,7 +112,6 @@ public class Game : MonoBehaviour {
         {
             yield return new WaitForSeconds(1);
             timeoutTimer += 1;
-            Debug.Log(timeoutTimer);
         }
         if (hadUpdate)
         {
