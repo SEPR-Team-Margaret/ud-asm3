@@ -390,33 +390,13 @@ public class ConflictResolution : MonoBehaviour {
         minigameStatus.SetActive(true);
         minigameStatus.ResetMinigame();
         minigame.SetActive(true);
-        /*
-        // wait until the minigame finishes
-        WaitForMinigame();
 
-        Debug.Log("minigame finished");
-
-
-        // re-enable all interactable elements of the main game:
-
-        foreach (GameObject sector in sectors)
-        {
-            // set the sector to its original layer (index 8)
-            sector.layer = 8;
-        }
-
-        // enable the various buttons in the main game
-        settingsButton.interactable = true;
-        helpButton.interactable = true;
-        chanceCardButton.interactable = true;
-        */
     }
 
     public void ResumeMainGame() {
 
         Debug.Log("minigame finished");
 
-
         // re-enable all interactable elements of the main game:
 
         foreach (GameObject sector in sectors)
@@ -430,16 +410,5 @@ public class ConflictResolution : MonoBehaviour {
         helpButton.interactable = true;
         chanceCardButton.interactable = true;
 
-    }
-
-    IEnumerator WaitForMinigame() {
-
-        yield return new WaitWhile(MinigameIsActive);
-
-    }
-
-    private bool MinigameIsActive() {
-
-        return minigameStatus.GetActive();
     }
 }

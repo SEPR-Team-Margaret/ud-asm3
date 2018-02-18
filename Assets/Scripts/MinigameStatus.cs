@@ -12,6 +12,7 @@ public class MinigameStatus : MonoBehaviour {
     [SerializeField] private GameObject buffAwarded;
     [SerializeField] private GameObject buffNotAwarded;
 
+    private Game game;
     private ChanceCards chanceCards;
 
     public bool GetActive() {
@@ -20,6 +21,15 @@ public class MinigameStatus : MonoBehaviour {
 
     public void SetActive(bool active) {
         this.active = active;
+
+        if (active == true)
+        {
+            game.PauseTurnTimer();
+        }
+        else
+        {
+            game.UnpauseTurnTimer();
+        }
     }
 
     public int GetPlayer() {
@@ -32,6 +42,7 @@ public class MinigameStatus : MonoBehaviour {
 
     void Start() {
 
+        game = this.gameObject.GetComponent<Game>();
         chanceCards = GameObject.Find("CardUI").GetComponent<ChanceCards>();
 
     }

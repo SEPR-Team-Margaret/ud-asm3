@@ -15,6 +15,7 @@ public class Game : MonoBehaviour {
 	private ConflictResolution conflictResolution;
 	public bool spawnNewUnitsEachTurn = true;
 	private float turnTimerLength = 30.0f;
+    [SerializeField] private bool turnTimerPaused = false;
     private bool hadUpdate = false;
 	public Text timerText;
 
@@ -35,15 +36,28 @@ public class Game : MonoBehaviour {
     }
 
 	void Update() {
-		turnTimerLength -= Time.deltaTime; //decrements timer on each update
-		updateTimerText(); //calls method to update counter in game UI
-		if (turnTimerLength < 0.0f) { //timer ran out
-			Debug.Log("TURN OVER - TIME RAN OUT");
-			NextTurn (); //move game to next player
-			ResetTimer (); //reset timer for next player
-			conflictResolution.UndoPress(); //resets UI ready for the next player to select a sector
-		}			
+
+        if (!turnTimerPaused)
+        {
+            turnTimerLength -= Time.deltaTime; //decrements timer on each update
+            updateTimerText(); //calls method to update counter in game UI
+            if (turnTimerLength < 0.0f)
+            { //timer ran out
+                Debug.Log("TURN OVER - TIME RAN OUT");
+                NextTurn(); //move game to next player
+                ResetTimer(); //reset timer for next player
+                conflictResolution.UndoPress(); //resets UI ready for the next player to select a sector
+            }	
+        }
 	}
+
+    public void PauseTurnTimer() {
+        turnTimerPaused = true;
+    }
+
+    public void UnpauseTurnTimer() {
+        turnTimerPaused = false;
+    }
 
     public int GetTurn(){
         return currentTurn;
