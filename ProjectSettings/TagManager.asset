@@ -41,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Borders
+    uniqueID: 3891219841
+    locked: 0
   - name: BackgroundItems
     uniqueID: 1879499465
     locked: 0

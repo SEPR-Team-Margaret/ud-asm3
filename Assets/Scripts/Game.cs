@@ -18,6 +18,7 @@ public class Game : MonoBehaviour {
     [SerializeField] private bool turnTimerPaused = false;
     private bool hadUpdate = false;
 	public Text timerText;
+	private Section[] sections;
 
     // Use this for initialization
     void Start () {
@@ -26,6 +27,8 @@ public class Game : MonoBehaviour {
         suddenDeath = GetComponent<SuddenDeath>();
 		conflictResolution = GetComponent<ConflictResolution>();
 		timerText = GameObject.Find("TurnTimerText").GetComponent<Text>();
+		sections = GameObject.Find("Sectors").GetComponentsInChildren<Section>();
+
         if (Data.IsDemo){
             StartCoroutine("DemoModeRoutine");
         }
@@ -105,6 +108,54 @@ public class Game : MonoBehaviour {
 
     }
 
+	public void DisableRayCast() 
+	{
+		Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
+		Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();
+		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();
+		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();
+		InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
+
+		gobutton.interactable = false;
+		backbutton.interactable = false;
+		cardbutton.interactable = false;
+		helpbutton.interactable = false;
+		settingsbutton.interactable = false;
+		unitstextbox.interactable = false;
+
+		foreach (Section section in sections)
+		{
+			section.gameObject.layer = LayerMask.NameToLayer ("Ignore Raycast");
+
+		}
+
+			
+	}
+
+	public void EnableRayCast ()
+	{
+		Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
+		Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();
+		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();
+		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();
+		InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
+
+		gobutton.interactable = true;
+		backbutton.interactable = true;
+		cardbutton.interactable = true;
+		helpbutton.interactable = true;
+		settingsbutton.interactable = true;
+		unitstextbox.interactable = true;
+
+		foreach (Section section in sections)
+		{
+			section.gameObject.layer = LayerMask.NameToLayer ("UI");
+
+		}
+
+	}
     // On input, break routine and restart itself
     IEnumerator DemoModeRoutine (){
         int timeoutTimer = 0;

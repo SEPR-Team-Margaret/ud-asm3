@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PVC : MonoBehaviour
 {
     public Vector3 vector;
+	public Button background;
 
     // Use this for initialization
     void Start()
     {
         vector = new Vector3(17, 14, 0);
+		background = GameObject.Find("PVCBackgroundButton").GetComponent<Button>();
+		background.interactable = true;
     }
 
     public void OnCollisionEnter(Collision collision)           //For each different side of the border there is a seperate if function, as each side has a different reflection normal
