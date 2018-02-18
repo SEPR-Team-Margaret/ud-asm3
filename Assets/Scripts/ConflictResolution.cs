@@ -75,6 +75,7 @@ public class ConflictResolution : MonoBehaviour {
     private Button chanceCardButton;
 
     private GameObject minigame;
+    private MinigameStatus minigameStatus;
 
     public int GetMode(){
         return mode;
@@ -108,6 +109,7 @@ public class ConflictResolution : MonoBehaviour {
 
         minigame = GameObject.Find("Minigame");
         minigame.SetActive(false);
+        minigameStatus = this.gameObject.GetComponent<MinigameStatus>();
 	}
 	
     /* For clarity, the parameter 'U' has been renamed 'units'
@@ -309,11 +311,7 @@ public class ConflictResolution : MonoBehaviour {
 					if (defendingSector.PVCHere == true) {
                         chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
 						//PLAY MINI GAME FOR PLAYER 1
-                        if (PlayMinigame(1))
-                        {
-                            // if player wins minigame, award another chance card
-                            chanceCards.SetPlayerOneChance(chanceCards.GetPlayerOneChance() + 1);
-                        }
+                        PlayMinigame(1);
                         defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
@@ -323,11 +321,7 @@ public class ConflictResolution : MonoBehaviour {
 					if (defendingSector.PVCHere == true) {
                         chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
 						//PLAY MINI GAME FOR PLAYER 2
-                        if (PlayMinigame(2))
-                        {
-                            // if player wins minigame, award another chance card
-                            chanceCards.SetPlayerTwoChance(chanceCards.GetPlayerTwoChance() + 1);
-                        }
+                        PlayMinigame(2);
 						defendingSector.PVCHere = false;
 						assignUnits.SpawnPVC();
 					}
@@ -337,11 +331,7 @@ public class ConflictResolution : MonoBehaviour {
                     if (defendingSector.PVCHere == true) {
                         chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
                         //PLAY MINI GAME FOR PLAYER 3
-                        if (PlayMinigame(3))
-                        {
-                            // if player wins minigame, award another chance card
-                            chanceCards.SetPlayerThreeChance(chanceCards.GetPlayerThreeChance() + 1);
-                        }
+                        PlayMinigame(3);
                         defendingSector.PVCHere = false;
                         assignUnits.SpawnPVC();
                     }
@@ -375,7 +365,7 @@ public class ConflictResolution : MonoBehaviour {
         }
     } 
 
-    private bool PlayMinigame(int player) {
+    private void PlayMinigame(int player) {
         // disables the main game board, activates the minigame, re-enables
         // the main game board, and returns whether or not the player won the minigame
 
@@ -396,9 +386,11 @@ public class ConflictResolution : MonoBehaviour {
 
         Debug.Log("starting minigame");
 
+        minigameStatus.SetPlayer(player);
+        minigameStatus.SetActive(true);
+        minigameStatus.ResetMinigame();
         minigame.SetActive(true);
-        minigame.GetComponentInChildren<MissClick>().Initialize();
-
+        /*
         // wait until the minigame finishes
         WaitForMinigame();
 
@@ -417,10 +409,27 @@ public class ConflictResolution : MonoBehaviour {
         settingsButton.interactable = true;
         helpButton.interactable = true;
         chanceCardButton.interactable = true;
+        */
+    }
+
+    public void ResumeMainGame() {
+
+        Debug.Log("minigame finished");
 
 
-        // return the outcome of the minigame
-        return minigame.GetComponentInChildren<MissClick>().win;
+        // re-enable all interactable elements of the main game:
+
+        foreach (GameObject sector in sectors)
+        {
+            // set the sector to its original layer (index 8)
+            sector.layer = 8;
+        }
+
+        // enable the various buttons in the main game
+        settingsButton.interactable = true;
+        helpButton.interactable = true;
+        chanceCardButton.interactable = true;
+
     }
 
     IEnumerator WaitForMinigame() {
@@ -430,13 +439,7 @@ public class ConflictResolution : MonoBehaviour {
     }
 
     private bool MinigameIsActive() {
-        if (minigame.activeInHierarchy)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+
+        return minigameStatus.GetActive();
     }
 }
