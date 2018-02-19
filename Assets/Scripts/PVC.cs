@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class PVC : MonoBehaviour
 {
-    public Vector3 vector;
-	public Button background;
+    public Vector3 vector;										//this is the vector the PVC sprite is transformed by
+	public Button background;									//this is used to assign the button component of the minigame background later on
 
     // Use this for initialization
     void Start()
     {
-        vector = new Vector3(17, 14, 0);
-		background = GameObject.Find("PVCBackgroundButton").GetComponent<Button>();
-		background.interactable = true;
+        vector = new Vector3(17, 14, 0);												//sets the sprite vector values
+		background = GameObject.Find("PVCBackgroundButton").GetComponent<Button>();		//finds the button component of the PVCBackround
+		background.interactable = true;													//sets the button component to interactable, so it doesnt register misses before the game is started
     }
 
     public void OnCollisionEnter(Collision collision)           //For each different side of the border there is a seperate if function, as each side has a different reflection normal
@@ -43,6 +43,6 @@ public class PVC : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(vector);
+        transform.Translate(vector);							//This transforms the sprite by the vector created above every frame, giving the vector movement in the minigame space
     }
 }

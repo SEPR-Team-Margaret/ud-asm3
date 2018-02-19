@@ -18,7 +18,7 @@ public class Game : MonoBehaviour {
     [SerializeField] private bool turnTimerPaused = false;
     private bool hadUpdate = false;
 	public Text timerText;
-	private Section[] sections;
+	private Section[] sections;	
 
     // Use this for initialization
     void Start () {
@@ -108,39 +108,39 @@ public class Game : MonoBehaviour {
 
     }
 
-	public void DisableRayCast() 
+	public void DisableRayCast() 				//this function disables the ability to click buttons on the main game (for when the settings menu is open)														
 	{
-		if (GameObject.Find("GoButton") != null) {
-			Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
-			gobutton.interactable = false;
+		if (GameObject.Find("GoButton") != null) {										//the gobutton is not always active thus an if statement is required when using the Find function
+			Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();		//finds the button component for the Go button
+			gobutton.interactable = false;												//disables the ability to click this button
 		}
 		if (GameObject.Find("BackButton") != null) {
-			Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();
+			Button backbutton = GameObject.Find("BackButton").GetComponent<Button>();	//the same as above but for the Back button
 			backbutton.interactable = false;
 		}
-		if (GameObject.Find("UnitsTextbox") != null) {
+		if (GameObject.Find("UnitsTextbox") != null) {												//the same as above but for the text box
 			InputField unitstextbox = GameObject.Find("UnitsTextbox").GetComponent<InputField>();
 			unitstextbox.interactable = false;
 		}
 			
-		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();
-		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();
-		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();
+		Button cardbutton = GameObject.Find("CardButton").GetComponent<Button>();				//finds the button component of the Chance Card button
+		Button helpbutton = GameObject.Find("HelpButton").GetComponent<Button>();				//"" for help button
+		Button settingsbutton = GameObject.Find("SettingsButton").GetComponent<Button>();		//"" for settings button
 
-		cardbutton.interactable = false;
+		cardbutton.interactable = false;														//disables the ability to click these buttons
 		helpbutton.interactable = false;
 		settingsbutton.interactable = false;
 
-		foreach (Section section in sections)
+		foreach (Section section in sections)													//this takes each sector in the map and lists it
 		{
-			section.gameObject.layer = LayerMask.NameToLayer ("Ignore Raycast");
+			section.gameObject.layer = LayerMask.NameToLayer ("Ignore Raycast");				//disables raycasting on each sector by changing the object layer
 
 		}
 
 			
 	}
 
-	public void EnableRayCast()
+	public void EnableRayCast()																	//exactly the same functionality as above, however enables button pressing and raycasting (for when the settings menu is open)
 	{
 		if (GameObject.Find("GoButton") != null) {
 			Button gobutton = GameObject.Find("GoButton").GetComponent<Button>();
